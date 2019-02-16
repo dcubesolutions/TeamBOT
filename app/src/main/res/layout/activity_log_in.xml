@@ -1,0 +1,95 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/curvedbgfull"
+    android:orientation="vertical">
+    <ImageView
+        android:layout_width="235dp"
+        android:layout_height="85dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/medicologo" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="140dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Log In"
+                android:textColor="#FFFFFF"
+                android:textSize="50dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/SiEmail"
+                android:layout_width="275dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:background="@drawable/roundcorner"
+                android:hint=" Email"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:textColorHint="#9D90D0"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/SiPassword"
+                android:layout_width="275dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:background="@drawable/roundcorner"
+                android:hint="Password"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:textColorHint="#9D90D0"
+                android:textSize="20dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/TvForgot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="Forgot Password?"
+                    android:textColor="#7968C0"
+                    android:textSize="15dp"
+                    android:textStyle="" />
+                <Button
+                    android:id="@+id/BtnSiSignIn"
+                    android:layout_width="134dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layout_marginTop="25dp"
+                    android:text="Log IN"
+                    android:textColor="#FFF"
+                    android:background="@drawable/registerbtn"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/TvRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="Already have an Account?"
+                    android:textColor="#7968C0"
+                    android:textSize="15dp"
+                    android:textStyle="" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
