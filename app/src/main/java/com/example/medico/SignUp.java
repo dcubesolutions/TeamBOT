@@ -1,24 +1,32 @@
 package com.example.medico;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,7 +38,7 @@ public class SignUp extends AppCompatActivity {
     boolean twice;
     final String TAG=getClass().getName();
     private FirebaseAuth mAuth;
-
+    DatabaseReference databaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +53,15 @@ public class SignUp extends AppCompatActivity {
         Email = (EditText) findViewById(R.id.Email);
         TvLogin= (TextView) findViewById(R.id.TvLogin);
         mAuth = FirebaseAuth.getInstance();
+        databaseUser = FirebaseDatabase.getInstance().getReference("user_data");
+
         BtnSuSignUp.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
                 if (FName.getText().toString().isEmpty()) {
+
                     Toast.makeText(getApplicationContext(), "FirstName Required..!!", Toast.LENGTH_SHORT).show();
                     FName.setError("FirstName Required");
                     return;
@@ -92,6 +105,9 @@ public class SignUp extends AppCompatActivity {
                 else{
                     String email=Email.getText().toString().trim();
                     String password=Password.getText().toString().trim();
+                    String fName= FName.getText().toString().trim();
+                    String lName = LName.getText().toString().trim();
+                    String mid = ContactNo.getText().toString().trim();
                     /*mAuth.createUserWithEmailAndPassword(user_email,user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -109,6 +125,12 @@ public class SignUp extends AppCompatActivity {
                             }
                         }
                     });*/
+
+                    insert_db(fName,lName,mid,email);
+
+
+
+
                     mAuth = FirebaseAuth.getInstance();
                     FirebaseUser user= mAuth.getCurrentUser();
 
@@ -166,6 +188,12 @@ public class SignUp extends AppCompatActivity {
          FirebaseUser currentUser = mAuth.getCurrentUser();
          update(currentUser);
     }*/
+public void insert_db(String fName,String lName,String mid,String email){
+    String id = databaseUser.push().getKey();
+    Users user_db = new Users(fName,lName,mid,email,id);
+    databaseUser.child(id).setValue(user_db);
+}
+
     public static boolean isContactNoValid(String ConnNo)
     {
         String regExpn="\\d{10}";//regEx for contact no.
@@ -188,7 +216,38 @@ public class SignUp extends AppCompatActivity {
         Email.setText("");
         Password.setText("");
     }
+    @Override
+    protected void onStart(){
 
+        SignUp.super.onStart();
+        databaseUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+//                    System.out.println(ds);
+//                    System.out.println(ds.getValue());
+
+                    ds.getValue();
+                    try {
+                        JSONObject reader = new JSONObject(ds.getValue().toString());
+                        System.out.println(reader.getString("mid"));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
     @Override
     public void onBackPressed() {
         Log.d(TAG,"click");
