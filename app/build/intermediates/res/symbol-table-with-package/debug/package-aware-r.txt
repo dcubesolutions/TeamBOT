@@ -1019,9 +1019,12 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable about
+drawable avatar
 drawable avd_hide_password
 drawable avd_show_password
 drawable back11
+drawable chat
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -1051,6 +1054,7 @@ drawable design_password_eye
 drawable design_snackbar_background
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
+drawable home
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_menu_camera
@@ -1063,7 +1067,9 @@ drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable loginbox
+drawable loginbtn
 drawable medicologo
+drawable medicowelcomelogo
 drawable mtrl_snackbar_background
 drawable mtrl_tabs_default_indicator
 drawable navigation_empty_icon
@@ -1080,7 +1086,9 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable registerbtn
+drawable registerbtn1
 drawable roundcorner
+drawable settings
 drawable side_nav_bar
 drawable signupbtn
 drawable tooltip_frame_dark
@@ -1120,7 +1128,6 @@ id SHIFT
 id SYM
 id SiEmail
 id SiPassword
-id TvForgot
 id TvLogin
 id TvRegister
 id action0
@@ -1140,7 +1147,6 @@ id action_menu_presenter
 id action_mode_bar
 id action_mode_bar_stub
 id action_mode_close_button
-id action_settings
 id action_text
 id actions
 id activity_chooser_view_content
@@ -1200,6 +1206,9 @@ id fill_vertical
 id filled
 id fixed
 id forever
+id forgotBtnConfirm
+id forgotEmail
+id forgotpass
 id ghost_view
 id gone
 id group_divider
@@ -1233,12 +1242,9 @@ id mtrl_child_content_container
 id mtrl_internal_children_alpha_tag
 id multiply
 id nav_about
-id nav_camera
-id nav_gallery
-id nav_manage
-id nav_send
-id nav_share
-id nav_slideshow
+id nav_chat
+id nav_home
+id nav_settings
 id nav_view
 id navigation_header_container
 id never
@@ -1253,6 +1259,7 @@ id parallax
 id parent
 id parentPanel
 id parent_matrix
+id pbar
 id percent
 id pin
 id progress_circular
@@ -1313,7 +1320,6 @@ id text2
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
-id textView
 id text_input_password_toggle
 id textinput_counter
 id textinput_error
@@ -1389,6 +1395,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_forgot_password
 layout activity_home
 layout activity_log_in
 layout activity_main
@@ -1434,6 +1441,8 @@ layout support_simple_spinner_dropdown_item
 menu activity_home_drawer
 menu home
 mipmap ic_launcher
+mipmap ic_launcher_background
+mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 string abc_action_bar_home_description
 string abc_action_bar_up_description

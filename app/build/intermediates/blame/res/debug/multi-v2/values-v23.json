@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/vrushangdesai/Downloads/Medico/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v23/values-v23.xml",
+            "outputFile": "F:\\android\\AndroidStudioProjects\\Medico\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
             "map": [
                 {
-                    "source": "/Users/vrushangdesai/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/8cc8ca08f9d4f7195111a719f6d6beec/res/values-v23/values-v23.xml",
+                    "source": "C:\\Users\\meetv\\.gradle\\caches\\transforms-1\\files-1.1\\cardview-v7-28.0.0.aar\\92d60ffd132bcd0f1529cced71dd2bfd\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/vrushangdesai/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/440888271654b4bea6cadff64a0630a2/res/values-v23/values-v23.xml",
+                    "source": "C:\\Users\\meetv\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\5db472277bf36a56426c478ed7f25d33\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,19,32,33,34,35,36",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4",

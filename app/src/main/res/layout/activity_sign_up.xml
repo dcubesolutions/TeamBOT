@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="21dp"
     android:background="@drawable/curvedbgfull"
     android:orientation="vertical">
     <ImageView
@@ -16,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -114,7 +116,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp">
             <Button
                 android:id="@+id/BtnSuSignUp"
                 android:layout_width="134dp"
@@ -122,7 +125,7 @@
                 android:layout_marginTop="25dp"
                 android:text="Register"
                 android:textColor="#FFF"
-                android:background="@drawable/registerbtn"
+                android:background="@drawable/registerbtn1"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:textStyle="bold" />
             <TextView
@@ -133,7 +136,7 @@
                 android:text="Already have an Account?"
                 android:textColor="#7968C0"
                 android:textSize="15dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:textStyle="bold" />
 
         </LinearLayout>

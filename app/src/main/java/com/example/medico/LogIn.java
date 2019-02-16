@@ -21,6 +21,7 @@ public class LogIn extends AppCompatActivity {
     Button BtnSiSignIn;
     EditText SiEmail, SiPassword;
     TextView TvRegister;
+    TextView forgotpass;
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class LogIn extends AppCompatActivity {
         SiEmail = (EditText) findViewById(R.id.SiEmail);
         SiPassword = (EditText) findViewById(R.id.SiPassword);
         TvRegister= (TextView) findViewById(R.id.TvRegister);
+        forgotpass = (TextView) findViewById(R.id.forgotpass);
         mAuth = FirebaseAuth.getInstance();
 
         BtnSiSignIn.setOnClickListener(new View.OnClickListener() {
@@ -87,5 +89,12 @@ public class LogIn extends AppCompatActivity {
                 startActivity(new Intent(LogIn.this,SignUp.class));
             }
         });
+        forgotpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LogIn.this,ForgotPassword.class));
+            }
+        });
+
     }
 }

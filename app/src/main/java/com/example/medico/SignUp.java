@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,6 +30,8 @@ public class SignUp extends AppCompatActivity {
     boolean twice;
     final String TAG=getClass().getName();
     private FirebaseAuth mAuth;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +109,9 @@ public class SignUp extends AppCompatActivity {
                             }
                         }
                     });*/
+                    mAuth = FirebaseAuth.getInstance();
+                    FirebaseUser user= mAuth.getCurrentUser();
+
                     mAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -151,7 +157,15 @@ public class SignUp extends AppCompatActivity {
         });*/
 
 
+
     }
+   /* @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+         FirebaseUser currentUser = mAuth.getCurrentUser();
+         update(currentUser);
+    }*/
     public static boolean isContactNoValid(String ConnNo)
     {
         String regExpn="\\d{10}";//regEx for contact no.

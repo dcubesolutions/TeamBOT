@@ -1,44 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/vrushangdesai/Downloads/Medico/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ur/values-ur.xml",
+            "outputFile": "F:\\android\\AndroidStudioProjects\\Medico\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ur\\values-ur.xml",
             "map": [
                 {
-                    "source": "/Users/vrushangdesai/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/0cd406c44a9bf88f07027eee8d57f359/res/values-ur/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "247",
-                        "endColumns": "210",
-                        "endOffsets": "457"
-                    },
-                    "to": {
-                        "startLines": "37",
-                        "startColumns": "4",
-                        "startOffsets": "3974",
-                        "endColumns": "210",
-                        "endOffsets": "4180"
-                    }
-                },
-                {
-                    "source": "/Users/vrushangdesai/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/e91e4ae0a34789081266672f0150aca5/res/values-ur/values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "245,351,547,671,780,979,1104,1242,1371,1582,1690,1893,2019,2224,2419,2508,2601",
-                        "endColumns": "105,195,123,108,198,124,137,128,210,107,202,125,204,194,88,92,112",
-                        "endOffsets": "350,546,670,779,978,1103,1241,1370,1581,1689,1892,2018,2223,2418,2507,2600,2713"
-                    },
-                    "to": {
-                        "startLines": "29,30,31,32,33,34,35,36,38,39,40,41,42,43,44,45,46",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "2824,2934,3130,3258,3371,3570,3699,3841,4185,4396,4508,4711,4841,5046,5245,5338,5435",
-                        "endColumns": "109,195,127,112,198,128,141,132,210,111,202,129,204,198,92,96,116",
-                        "endOffsets": "2929,3125,3253,3366,3565,3694,3836,3969,4391,4503,4706,4836,5041,5240,5333,5430,5547"
-                    }
-                },
-                {
-                    "source": "/Users/vrushangdesai/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/440888271654b4bea6cadff64a0630a2/res/values-ur/values-ur.xml",
+                    "source": "C:\\Users\\meetv\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\5db472277bf36a56426c478ed7f25d33\\res\\values-ur\\values-ur.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -55,7 +21,24 @@
                     }
                 },
                 {
-                    "source": "/Users/vrushangdesai/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/5e7846ed972fbc6414febe91ad3c9313/res/values-ur/values-ur.xml",
+                    "source": "C:\\Users\\meetv\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-16.0.1.aar\\dbf3b3c1c1bb7f9847491fe9a25330f6\\res\\values-ur\\values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "245,351,547,671,780,979,1104,1242,1371,1582,1690,1893,2019,2224,2419,2508,2601",
+                        "endColumns": "105,195,123,108,198,124,137,128,210,107,202,125,204,194,88,92,112",
+                        "endOffsets": "350,546,670,779,978,1103,1241,1370,1581,1689,1892,2018,2223,2418,2507,2600,2713"
+                    },
+                    "to": {
+                        "startLines": "29,30,31,32,33,34,35,36,38,39,40,41,42,43,44,45,46",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "2824,2934,3130,3258,3371,3570,3699,3841,4185,4396,4508,4711,4841,5046,5245,5338,5435",
+                        "endColumns": "109,195,127,112,198,128,141,132,210,111,202,129,204,198,92,96,116",
+                        "endOffsets": "2929,3125,3253,3366,3565,3694,3836,3969,4391,4503,4706,4836,5041,5240,5333,5430,5547"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\meetv\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-28.0.0.aar\\2a995899b38134a340505944a5018106\\res\\values-ur\\values-ur.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -69,6 +52,23 @@
                         "startOffsets": "5632",
                         "endColumns": "100",
                         "endOffsets": "5728"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\meetv\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-16.1.0.aar\\3d1716b63fb3218abccd84b9844b6423\\res\\values-ur\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "247",
+                        "endColumns": "210",
+                        "endOffsets": "457"
+                    },
+                    "to": {
+                        "startLines": "37",
+                        "startColumns": "4",
+                        "startOffsets": "3974",
+                        "endColumns": "210",
+                        "endOffsets": "4180"
                     }
                 }
             ]

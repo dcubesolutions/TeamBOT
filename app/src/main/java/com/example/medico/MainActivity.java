@@ -5,8 +5,11 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
+public class MainActivity extends AppCompatActivity {
+private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,8 +19,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent i= new Intent(MainActivity.this,SignUp.class);
-                startActivity(i);
+                mAuth = FirebaseAuth.getInstance();
+                FirebaseUser user= mAuth.getCurrentUser();
+                startActivity(new Intent(MainActivity.this,SignUp.class));
+               /* if(user!=null)
+                {
+                    finish();
+                    startActivity(new Intent(MainActivity.this,HomeActivity.class));
+                }
+                else {
+                    startActivity(i);
+                }*/
             }
         },3000);
+
     }
 }
