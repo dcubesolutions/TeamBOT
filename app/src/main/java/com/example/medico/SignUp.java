@@ -28,6 +28,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,6 +44,7 @@ public class SignUp extends AppCompatActivity {
     final String TAG=getClass().getName();
     private FirebaseAuth mAuth;
     DatabaseReference databaseUser;
+    List<String> numbers = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,9 +161,23 @@ public void auth_user(FirebaseAuth mauth,FirebaseUser user,String email,String p
             });
 }
 public void insert_db(String fName,String lName,String mid,String email){
-    String id = databaseUser.push().getKey();
-    Users user_db = new Users(fName,lName,mid,email,id);
-    databaseUser.child(id).setValue(user_db);
+
+    ListIterator<String> scanNumbers = numbers.listIterator();
+    int flag =0;
+    while (scanNumbers.hasNext()){
+        if(mid==scanNumbers.next()){
+            flag=1;
+        }
+    }
+    if(flag==1){
+        String id = databaseUser.push().getKey();
+        Users user_db = new Users(fName,lName,mid,email,id);
+        databaseUser.child(id).setValue(user_db);
+    }
+    else{
+        Toast.makeText(SignUp.this,"Mobile Number Already Exists !",Toast.LENGTH_LONG).show();
+    }
+
 }
 
     public static boolean isContactNoValid(String ConnNo)
@@ -196,10 +216,11 @@ public void insert_db(String fName,String lName,String mid,String email){
 
                     ds.getValue();
                     try {
-                        JSONObject reader = new JSONObject(ds.getValue().toString());
-                        System.out.println(reader.getString("mid"));
+                        Map<String,String> user_dictionary = dataSnapshot.getValue(Map.class);
+                        String mobile_number = user_dictionary.get("mid");
+                        numbers.add(mobile_number);
 
-                    } catch (JSONException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
