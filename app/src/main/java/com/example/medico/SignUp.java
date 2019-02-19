@@ -29,6 +29,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,6 +46,7 @@ public class SignUp extends AppCompatActivity {
     private FirebaseAuth mAuth;
     String imageUrl;
     DatabaseReference databaseUser;
+    List<String> numbers = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +116,7 @@ public class SignUp extends AppCompatActivity {
                     String fName= FName.getText().toString().trim();
                     String lName = LName.getText().toString().trim();
                     String mid = ContactNo.getText().toString().trim();
+<<<<<<< HEAD
 
                     insert_db(fName,lName,mid,email);
 
@@ -137,6 +144,14 @@ public class SignUp extends AppCompatActivity {
                                     // ...
                                 }
                             });
+=======
+                    mAuth = FirebaseAuth.getInstance();
+                    FirebaseUser user= mAuth.getCurrentUser();
+
+                    insert_db(fName,lName,mid,email);
+                    auth_user(mAuth,user,email,password);
+
+>>>>>>> eeeb26ca5ae2f8f7803ee3de395ff086ea45cef1
                 }
 
 
@@ -148,21 +163,60 @@ public class SignUp extends AppCompatActivity {
                 startActivity(new Intent(SignUp.this,LogIn.class));
             }
         });
-       /* BtnSuCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CleanEditText();
-            }
-        });*/
-
 
 
     }
 
+<<<<<<< HEAD
 public void insert_db(String fName,String lName,String mid,String email){
     String id = databaseUser.push().getKey();
     User user_db = new User(fName,lName,mid,email,id,imageUrl);
     databaseUser.child(id).setValue(user_db);
+=======
+
+public void auth_user(FirebaseAuth mauth,FirebaseUser user,String email,String password){
+    mAuth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(String.valueOf(SignUp.this), "createUserWithEmail:success");
+                        Toast.makeText(SignUp.this, "Successfully Registered",
+                                Toast.LENGTH_SHORT).show();
+
+                        startActivity(new Intent(SignUp.this,LogIn.class));
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(String.valueOf(SignUp.this), "createUserWithEmail:failure");
+                        Toast.makeText(SignUp.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+                        //updateUI(null);
+                    }
+
+                    // ...
+                }
+            });
+}
+public void insert_db(String fName,String lName,String mid,String email){
+
+    ListIterator<String> scanNumbers = numbers.listIterator();
+    int flag =0;
+    while (scanNumbers.hasNext()){
+        if(mid==scanNumbers.next()){
+            flag=1;
+        }
+    }
+    if(flag==1){
+        String id = databaseUser.push().getKey();
+        Users user_db = new Users(fName,lName,mid,email,id);
+        databaseUser.child(id).setValue(user_db);
+    }
+    else{
+        Toast.makeText(SignUp.this,"Mobile Number Already Exists !",Toast.LENGTH_LONG).show();
+    }
+
+>>>>>>> eeeb26ca5ae2f8f7803ee3de395ff086ea45cef1
 }
 
     public static boolean isContactNoValid(String ConnNo)
@@ -201,10 +255,11 @@ public void insert_db(String fName,String lName,String mid,String email){
 
                     ds.getValue();
                     try {
-                        JSONObject reader = new JSONObject(ds.getValue().toString());
-                        System.out.println(reader.getString("mid"));
+                        Map<String,String> user_dictionary = dataSnapshot.getValue(Map.class);
+                        String mobile_number = user_dictionary.get("mid");
+                        numbers.add(mobile_number);
 
-                    } catch (JSONException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
