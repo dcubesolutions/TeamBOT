@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.medico">
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/medicoicon"
@@ -9,7 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateVisible|adjustPan">
-        <activity android:name=".ForgotPassword"></activity>
+        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".Posts" />
+        <activity android:name=".ForgotPassword" />
         <activity
             android:name=".LogIn"
             android:windowSoftInputMode="stateVisible|adjustPan" />
@@ -28,4 +31,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

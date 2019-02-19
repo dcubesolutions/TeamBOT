@@ -23,8 +23,8 @@ private FirebaseAuth mAuth;
                 FirebaseUser user= mAuth.getCurrentUser();
                 if(user!=null)
                 {
-                    finish();
                     startActivity(new Intent(MainActivity.this,HomeActivity.class));
+                    finish();
                 }
                 else {
                     startActivity(i);

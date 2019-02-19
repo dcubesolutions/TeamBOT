@@ -16,6 +16,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.medico.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -38,6 +39,7 @@ public class SignUp extends AppCompatActivity {
     boolean twice;
     final String TAG=getClass().getName();
     private FirebaseAuth mAuth;
+    String imageUrl;
     DatabaseReference databaseUser;
 
     @Override
@@ -108,28 +110,8 @@ public class SignUp extends AppCompatActivity {
                     String fName= FName.getText().toString().trim();
                     String lName = LName.getText().toString().trim();
                     String mid = ContactNo.getText().toString().trim();
-                    /*mAuth.createUserWithEmailAndPassword(user_email,user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                //mAuth.signInWithEmailAndPassword(Email.getText().toString().trim(),Password.getText().toString().trim());
-                                Toast.makeText(getApplicationContext(),"User Registered Successfully",Toast.LENGTH_SHORT).show();
-                                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
-                                DatabaseReference currentUserDB=mDatabase.child(mAuth.getCurrentUser().getUid());
-                                currentUserDB.child("Fname").setValue("default");
-                                currentUserDB.child("Lname").setValue("default");
-                                currentUserDB.child("Contact No").setValue("default");
-                            }
-                            else{
-                                Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });*/
 
                     insert_db(fName,lName,mid,email);
-
-
-
 
                     mAuth = FirebaseAuth.getInstance();
                     FirebaseUser user= mAuth.getCurrentUser();
@@ -143,11 +125,6 @@ public class SignUp extends AppCompatActivity {
                                         Log.d(String.valueOf(SignUp.this), "createUserWithEmail:success");
                                         Toast.makeText(SignUp.this, "Successfully Registered",
                                                 Toast.LENGTH_SHORT).show();
-                                        /*DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
-                                        DatabaseReference currentUserDB=mDatabase.child(mAuth.getCurrentUser().getUid());
-                                        currentUserDB.child("Fname").setValue(FName.getText().toString().trim());
-                                        currentUserDB.child("Lname").setValue(LName.getText().toString().trim());
-                                        currentUserDB.child("Contact No").setValue(ContactNo.getText().toString().trim());*/
                                         startActivity(new Intent(SignUp.this,LogIn.class));
                                     } else {
                                         // If sign in fails, display a message to the user.
@@ -181,16 +158,10 @@ public class SignUp extends AppCompatActivity {
 
 
     }
-   /* @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-         FirebaseUser currentUser = mAuth.getCurrentUser();
-         update(currentUser);
-    }*/
+
 public void insert_db(String fName,String lName,String mid,String email){
     String id = databaseUser.push().getKey();
-    Users user_db = new Users(fName,lName,mid,email,id);
+    User user_db = new User(fName,lName,mid,email,id,imageUrl);
     databaseUser.child(id).setValue(user_db);
 }
 

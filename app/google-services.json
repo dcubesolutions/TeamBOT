@@ -23,6 +23,146 @@
           }
         },
         {
+          "client_id": "860110234740-hj90jvofc3t9dsq50nfa8bpvvi13938u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.medico",
+            "certificate_hash": "c04012fd60ccda750c03ce4a35f6c27343a5aa89"
+          }
+        },
+        {
+          "client_id": "860110234740-68dgom6o1rju9lv98h7tdir8vq5fhbjh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1SK2PVOjs9wTyqf_lhoRpz1zqgQuu6nc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "860110234740-68dgom6o1rju9lv98h7tdir8vq5fhbjh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860110234740:android:a5802e846cad735e",
+        "android_client_info": {
+          "package_name": "com.example.medico2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "860110234740-i5kt5bfs203e1b9bgmtgras4vsgvcoat.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.medico2",
+            "certificate_hash": "609e26fb9fd10c5607bda73b41ba70c9dd668e3a"
+          }
+        },
+        {
+          "client_id": "860110234740-68dgom6o1rju9lv98h7tdir8vq5fhbjh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1SK2PVOjs9wTyqf_lhoRpz1zqgQuu6nc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "860110234740-68dgom6o1rju9lv98h7tdir8vq5fhbjh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860110234740:android:13c3c6a65bcbec53",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "860110234740-66d98elbbq7l579lrl41uf58bsilv8o0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "609e26fb9fd10c5607bda73b41ba70c9dd668e3a"
+          }
+        },
+        {
+          "client_id": "860110234740-68dgom6o1rju9lv98h7tdir8vq5fhbjh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1SK2PVOjs9wTyqf_lhoRpz1zqgQuu6nc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "860110234740-68dgom6o1rju9lv98h7tdir8vq5fhbjh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860110234740:android:ac3141b0718defa3",
+        "android_client_info": {
+          "package_name": "com.example.myapplication1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "860110234740-3610vri932c3ro1r1jtqim12gk93a5du.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication1",
+            "certificate_hash": "c04012fd60ccda750c03ce4a35f6c27343a5aa89"
+          }
+        },
+        {
           "client_id": "860110234740-68dgom6o1rju9lv98h7tdir8vq5fhbjh.apps.googleusercontent.com",
           "client_type": 3
         }
