@@ -16,6 +16,7 @@ package com.example.medico;
         import android.support.v7.widget.Toolbar;
         import android.view.Menu;
         import android.view.MenuItem;
+        import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -102,6 +103,9 @@ public class HomeActivity extends AppCompatActivity
             ft.commit();
         } else if (id == R.id.nav_about) {
 
+        } else if (id == R.id.nav_logut) {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(HomeActivity.this,LogIn.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
