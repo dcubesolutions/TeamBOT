@@ -1,48 +1,11 @@
-<LinearLayout
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#FFF"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <ScrollView
+    android:orientation="vertical" >
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/blogPostView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:background="@drawable/baby"
-               android:layout_marginBottom="50dp"/>
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginBottom="50dp"
-                android:background="@drawable/baby"/>
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginBottom="50dp"
-                android:background="@drawable/baby"/>
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginBottom="50dp"
-                android:background="@drawable/baby"/>
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginBottom="50dp"
-                android:background="@drawable/baby"/>
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginBottom="50dp"
-                android:background="@drawable/baby"/>
-
-
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+        android:layout_height="match_parent" />
+</FrameLayout>

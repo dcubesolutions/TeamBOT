@@ -1,14 +1,14 @@
 package com.example.medico;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +22,7 @@ public class LogIn extends AppCompatActivity {
     EditText SiEmail, SiPassword;
     TextView TvRegister;
     TextView forgotpass;
+    ProgressBar progressBar2;
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class LogIn extends AppCompatActivity {
         SiPassword = (EditText) findViewById(R.id.SiPassword);
         TvRegister= (TextView) findViewById(R.id.TvRegister);
         forgotpass = (TextView) findViewById(R.id.forgotpass);
+        progressBar2=(ProgressBar)findViewById(R.id.progressBar2);
         mAuth = FirebaseAuth.getInstance();
 
         BtnSiSignIn.setOnClickListener(new View.OnClickListener() {
@@ -69,8 +71,10 @@ public class LogIn extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+                                BtnSiSignIn.setEnabled(false);
                                 Toast.makeText(LogIn.this, "Logged In :)",
                                         Toast.LENGTH_SHORT).show();
+                                progressBar2.setVisibility(View.VISIBLE);
                                 startActivity(new Intent(LogIn.this,HomeActivity.class));
                             }
                             else
