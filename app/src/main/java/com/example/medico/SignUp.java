@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ProgressBar;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,6 +42,7 @@ public class SignUp extends AppCompatActivity {
     final String TAG=getClass().getName();
     private FirebaseAuth mAuth;
     DatabaseReference databaseUser;
+    ProgressBar progressBar2;
     String ImageUrl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +56,10 @@ public class SignUp extends AppCompatActivity {
         Password = (EditText) findViewById(R.id.Password);
         Email = (EditText) findViewById(R.id.Email);
         TvLogin= (TextView) findViewById(R.id.TvLogin);
+        progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
         mAuth = FirebaseAuth.getInstance();
+        progressBar2.setVisibility(View.INVISIBLE);
+
         databaseUser = FirebaseDatabase.getInstance().getReference("user_data");
 
         BtnSuSignUp.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +67,7 @@ public class SignUp extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                BtnSuSignUp.setEnabled(false);
+                progressBar2.setVisibility(View.VISIBLE);
                 if (FName.getText().toString().isEmpty()) {
 
                     Toast.makeText(getApplicationContext(), "FirstName Required..!!", Toast.LENGTH_SHORT).show();
@@ -139,8 +145,6 @@ public class SignUp extends AppCompatActivity {
                                 }
                             });
                 }
-
-
             }
         });
         TvLogin.setOnClickListener(new View.OnClickListener() {

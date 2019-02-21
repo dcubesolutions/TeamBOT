@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ public class LogIn extends AppCompatActivity {
     EditText SiEmail, SiPassword;
     TextView TvRegister;
     TextView forgotpass;
-    ProgressBar progressBar2;
+    ProgressBar progressBar;
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +35,19 @@ public class LogIn extends AppCompatActivity {
         SiPassword = (EditText) findViewById(R.id.SiPassword);
         TvRegister= (TextView) findViewById(R.id.TvRegister);
         forgotpass = (TextView) findViewById(R.id.forgotpass);
-        progressBar2=(ProgressBar)findViewById(R.id.progressBar2);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         mAuth = FirebaseAuth.getInstance();
-
+        progressBar.setVisibility(View.INVISIBLE);
         BtnSiSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 if (SiEmail.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Email Required..!!", Toast.LENGTH_SHORT).show();
                     SiEmail.setError("Email Required");
                     return;
+
                 } else if (!Patterns.EMAIL_ADDRESS.matcher(SiEmail.getText().toString().trim()).matches()) {
                     Toast.makeText(getApplicationContext(), "Email Invaild..!!", Toast.LENGTH_SHORT).show();
                     SiEmail.setError("Email Invalid");
@@ -53,28 +57,14 @@ public class LogIn extends AppCompatActivity {
                     SiPassword.setError("Password Invalid");
                     return;
                 } else {
-                   /* ArrayList<HashMap<String, String>> ARRUSER = new ArrayList<>();
-                    ARRUSER = new DBHandler(getApplicationContext()).UserDataReadFunction
-                            ("Select * from UserData Where UEmail='" + SiEmail.getText().toString().trim() + "'" +
-                                    "and UPassword='" + SiPassword.getText().toString().trim() + "'");
-                    if (ARRUSER.isEmpty()) {
-                        Toast.makeText(getApplicationContext(), "Invalid Username or Password :(", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Logged In :)", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), About_Context_SingnUp_SignIn.class));
-
-                    }
-                    */
                     String email=SiEmail.getText().toString().trim();
                     String password=SiPassword.getText().toString().trim();
                     mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                BtnSiSignIn.setEnabled(false);
                                 Toast.makeText(LogIn.this, "Logged In :)",
                                         Toast.LENGTH_SHORT).show();
-                                progressBar2.setVisibility(View.VISIBLE);
                                 startActivity(new Intent(LogIn.this,HomeActivity.class));
                             }
                             else
@@ -96,7 +86,7 @@ public class LogIn extends AppCompatActivity {
         forgotpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LogIn.this,ForgotPassword.class));
+                  startActivity(new Intent(LogIn.this,ForgotPassword.class));
             }
         });
 
