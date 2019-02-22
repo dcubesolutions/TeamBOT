@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ProgressBar;
@@ -39,6 +41,7 @@ public class SignUp extends AppCompatActivity {
     EditText FName, LName,ContactNo, Password, Email, CPassword;
     TextView TvLogin;
     boolean twice;
+    Spinner category;
     final String TAG=getClass().getName();
     private FirebaseAuth mAuth;
     DatabaseReference databaseUser;
@@ -56,20 +59,22 @@ public class SignUp extends AppCompatActivity {
         Password = (EditText) findViewById(R.id.Password);
         Email = (EditText) findViewById(R.id.Email);
         TvLogin= (TextView) findViewById(R.id.TvLogin);
+        category=(Spinner)findViewById(R.id.category);
         progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
         mAuth = FirebaseAuth.getInstance();
-        progressBar2.setVisibility(View.INVISIBLE);
+
+        ArrayAdapter<String> newadapter = new ArrayAdapter<String>(
+                SignUp.this, R.layout.spinner_layout_test, getResources().getStringArray(R.array.category)
+        );
+        category.setAdapter(newadapter);
 
         databaseUser = FirebaseDatabase.getInstance().getReference("user_data");
-
+        progressBar2.setVisibility(View.INVISIBLE);
         BtnSuSignUp.setOnClickListener(new View.OnClickListener() {
-
-
             @Override
             public void onClick(View view) {
                 progressBar2.setVisibility(View.VISIBLE);
                 if (FName.getText().toString().isEmpty()) {
-
                     Toast.makeText(getApplicationContext(), "FirstName Required..!!", Toast.LENGTH_SHORT).show();
                     FName.setError("FirstName Required");
                     return;
@@ -111,16 +116,14 @@ public class SignUp extends AppCompatActivity {
                     return;
                 }
                 else{
-                    String email=Email.getText().toString().trim();
-                    String password=Password.getText().toString().trim();
-                    String fName= FName.getText().toString().trim();
-                    String lName = LName.getText().toString().trim();
-                    String mid = ContactNo.getText().toString().trim();
 
-                    insert_db(fName,lName,mid,email);
+                   final String email=Email.getText().toString().trim();
+                   final String password=Password.getText().toString().trim();
+                   final String fName= FName.getText().toString().trim();
+                   final String lName = LName.getText().toString().trim();
+                   final String mid = ContactNo.getText().toString().trim();
 
                     mAuth = FirebaseAuth.getInstance();
-                    FirebaseUser user= mAuth.getCurrentUser();
 
                     mAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -132,7 +135,9 @@ public class SignUp extends AppCompatActivity {
                                         Log.d(String.valueOf(SignUp.this), "createUserWithEmail:success");
                                         Toast.makeText(SignUp.this, "Successfully Registered",
                                                 Toast.LENGTH_SHORT).show();
+                                        insert_db(fName,lName,mid,email);
                                         startActivity(new Intent(SignUp.this,LogIn.class));
+
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Log.w(String.valueOf(SignUp.this), "createUserWithEmail:failure");
@@ -145,6 +150,7 @@ public class SignUp extends AppCompatActivity {
                                 }
                             });
                 }
+                progressBar2.setVisibility(View.INVISIBLE);
             }
         });
         TvLogin.setOnClickListener(new View.OnClickListener() {
@@ -163,9 +169,9 @@ public class SignUp extends AppCompatActivity {
 
 
     }
-
+    //String user= mAuth.getCurrentUser().getUid();
     public void insert_db(String fName,String lName,String mid,String email){
-        String id = databaseUser.push().getKey();
+        String id= mAuth.getCurrentUser().getUid();
         User user_db = new User(fName,lName,mid,email,id,ImageUrl);
         databaseUser.child(id).setValue(user_db);
     }
@@ -212,10 +218,7 @@ public class SignUp extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
                 }
-
             }
 
             @Override

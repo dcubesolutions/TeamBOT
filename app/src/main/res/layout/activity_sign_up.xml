@@ -12,6 +12,22 @@
         android:layout_marginTop="50dp"
         android:background="@drawable/medicologo" />
 
+    <LinearLayout
+        android:paddingTop="120dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Sign Up"
+            android:textColor="#FFFFFF"
+            android:textSize="50dp"
+            android:textStyle="bold" />
+    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -99,6 +115,18 @@
                 android:paddingLeft="20dp"
                 android:textColorHint="#9D90D0"
                 android:textSize="20dp" />
+
+            <Spinner
+                android:id="@+id/category"
+                android:layout_width="275dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:background="@drawable/roundcorner"
+                android:dropDownWidth="wrap_content"
+                android:paddingLeft="20dp"
+                android:popupBackground="@drawable/spinnerbg"
+                android:spinnerMode="dropdown" />
 
             <LinearLayout
                 android:layout_width="match_parent"

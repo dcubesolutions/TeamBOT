@@ -66,7 +66,6 @@ public class newPost extends AppCompatActivity {
      ProgressBar progressBarImage;
      StorageReference storageReference;
      FirebaseAuth mAuth;
-     FirebaseFirestore firebaseFirestore;
      Bitmap compressedImageFile;
     DatabaseReference databasePosts;
     @Override
@@ -80,7 +79,6 @@ public class newPost extends AppCompatActivity {
 
         User user=new User();
         storageReference= FirebaseStorage.getInstance().getReference();
-        firebaseFirestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user_id= mAuth.getCurrentUser().getUid();
         databasePosts = FirebaseDatabase.getInstance().getReference("Posts");
@@ -147,7 +145,7 @@ public class newPost extends AppCompatActivity {
                                     compressedImageFile.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                                     byte[] thumbData = baos.toByteArray();
 
-                                    UploadTask uploadTask = storageReference.child("post_images/thumbs")
+                                    UploadTask uploadTask = storageReference.child("postImages/thumbs")
                                             .child(randomName + ".jpg").putBytes(thumbData);
 
                                     uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {

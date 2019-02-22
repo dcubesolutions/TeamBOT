@@ -26,7 +26,7 @@ public class ChatActivity extends AppCompatActivity {
 
         ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
 
-        viewPagerAdapter.addFragment(new ChatsFragment(),"chats");
+        viewPagerAdapter.addFragment(new ChatsFragment(),"Chat");
         viewPagerAdapter.addFragment(new UsersFragment(),"Users");
 
         viewpager.setAdapter(viewPagerAdapter);

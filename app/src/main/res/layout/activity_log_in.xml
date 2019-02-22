@@ -43,7 +43,7 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/roundcorner"
                 android:hint=" Email"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:paddingLeft="15dp"
                 android:textColorHint="#9D90D0"
                 android:textSize="20dp" />
@@ -99,11 +99,6 @@
                     android:textSize="15dp"
                     android:textStyle="" />
 
-                <ProgressBar
-                    android:id="@+id/progressBar2"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
