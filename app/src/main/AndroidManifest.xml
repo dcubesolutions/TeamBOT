@@ -19,6 +19,7 @@
         <activity
             android:name=".LogIn"
             android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity android:name=".MessageActivity"></activity>
         <activity
             android:name=".SignUp"
             android:windowSoftInputMode="stateVisible|adjustPan" />

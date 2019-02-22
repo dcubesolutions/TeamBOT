@@ -32,30 +32,34 @@
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/blog_desc"
+                app:layout_constraintTop_toBottomOf="@+id/blogTitle"
                 app:srcCompat="@mipmap/action_like_gray" />
 
             <TextView
                 android:id="@+id/blog_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="164dp"
+                android:layout_marginTop="8dp"
                 android:text="Blog Post Date"
-                tools:layout_editor_absoluteX="255dp"
-                tools:layout_editor_absoluteY="301dp" />
+                app:layout_constraintStart_toEndOf="@+id/blog_like_count"
+                app:layout_constraintTop_toBottomOf="@+id/blogTitle" />
 
             <ImageView
                 android:id="@+id/blog_image"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
+                android:layout_marginTop="24dp"
                 android:scaleType="centerCrop"
+                app:layout_constraintBottom_toTopOf="@+id/blogTitle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/image_placeholder"
-                tools:layout_editor_absoluteY="36dp" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/image_placeholder" />
 
             <TextView
-                android:id="@+id/blog_desc"
+                android:id="@+id/blogTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -63,6 +67,7 @@
                 android:layout_marginEnd="16dp"
                 android:text="Lorem ipsum dolor sit amet, soluta regione urbanitas vis in, qui elit populo ut. "
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/blog_image" />
 
@@ -76,7 +81,7 @@
                 android:text="0 Likes"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/blog_like_btn"
-                app:layout_constraintTop_toBottomOf="@+id/blog_desc" />
+                app:layout_constraintTop_toBottomOf="@+id/blogTitle" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

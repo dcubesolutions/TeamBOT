@@ -31,8 +31,8 @@ public class ChatsFragment extends Fragment {
     private UserAdapter userAdapter;
     private List<User> mUser;
 
-    FirebaseUser fuser;
-    DatabaseReference reference;
+    private FirebaseUser fuser;
+    private DatabaseReference reference;
 
     private List<String> usersList;
 

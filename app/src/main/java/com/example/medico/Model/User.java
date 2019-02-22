@@ -1,12 +1,12 @@
 package com.example.medico.Model;
 
 public class User {
-    String fName;
-    String lName;
-    String mid;
-    String email;
-    String id;
-    String imageUrl;
+    private String fName;
+    private String lName;
+    private String mid;
+    private String email;
+    private String id;
+    private String imageUrl;
     public String getfName() {
         return fName;
     }

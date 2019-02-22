@@ -40,16 +40,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
         final User user=mUser.get(i);
         viewHolder.fName.setText(user.getfName());
-        if (user.getImageUrl().equals("default")){
+       /* if (user.getImageUrl().equals("default")){
             viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
         }else{
             Glide.with(mContext).load(user.getImageUrl()).into(viewHolder.profile_image);
-        }
+        }*/
+        viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(mContext, MessageActivity.class);
-                intent.putExtra("userid", user.getId());
+                intent.putExtra("id", user.getId());
                 mContext.startActivity(intent);
             }
         });
@@ -68,7 +69,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             public ViewHolder(View itemView)
             {
                 super(itemView);
-
                 fName=itemView.findViewById(R.id.username);
                 profile_image=itemView.findViewById(R.id.profile_image);
             }
