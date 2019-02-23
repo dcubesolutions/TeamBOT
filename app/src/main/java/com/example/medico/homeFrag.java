@@ -1,4 +1,4 @@
-/*
+
 package com.example.medico;
 
 
@@ -46,11 +46,11 @@ import java.util.ListIterator;
         // Inflate the layout for this fragment
         View view = inflater.inflate((R.layout.fragment_home), container, false);
         blog_list = new ArrayList<>();
-        blogListView = getActivity().findViewById(R.id.blogPostView);
+        blogListView = view.findViewById(R.id.blogPostView);
 
 
-        //blogRecyclerAdapter = new BlogRecyclerAdapter(blog_list);
-//        blogListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        blogRecyclerAdapter = new BlogRecyclerAdapter(blog_list);
+        blogListView.setLayoutManager(new LinearLayoutManager(getActivity()));
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference("Posts");
         databaseReference.addValueEventListener(new ValueEventListener() {

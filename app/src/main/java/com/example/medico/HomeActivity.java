@@ -90,7 +90,7 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-         //   ft.replace(R.id.frmLyt,new homeFrag());
+           ft.replace(R.id.frmLyt,new homeFrag());
             ft.commit();
         } else if (id == R.id.nav_chat) {
             startActivity(new Intent(HomeActivity.this,ChatActivity.class));

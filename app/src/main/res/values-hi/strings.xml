@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Medico</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_sign_up">SignUp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="category">
+        <item>वर्ग चुने</item>
+        <item>मरीज</item>
+        <item>चिकित्सक</item>
+    </string-array>
+
+    <string-array name="lang">
+        <item>भाषा चुनें</item>
+        <item>अंग्रेज़ी</item>
+        <item>हिंदी</item>
+    </string-array>
+
+    <string name="post_title">पोस्ट</string>
+
+    <string name="confirm_password">पासवर्ड की पुष्टि कीजिये</string>
+    <string name="password">पासवर्ड</string>
+    <string name="email">ईमेल</string>
+    <string name="sign_up">साइन अप करें</string>
+    <string name="first_name">पहला नाम</string>
+    <string name="last_name">अंतिम नाम</string>
+    <string name="mobileno">मोबाइल नंबर</string>
+    <string name="register">रजिस्टर</string>
+    <string name="have_an_account">पहले से ही एक खाता है?</string>
+
+    <string name="dont_have_an_account">खाता नहीं है?</string>
+    <string name="log_in">लॉग इन करें</string>
+    <string name="forgot_password">पासवर्ड भूल गए?</string>
+    <string name="confirm_btn">पुष्टि करें</string>
+    <string name="enter_email_address">ईमेल दर्ज करें</string>
+
+    <string name="home">होम</string>
+    <string name="log_out">लोग आउट</string>
+    <string name="chat">बातचीत</string>
+    <string name="settings">सेटिंग्स</string>
+    <string name="about">विषय</string>
+</resources>

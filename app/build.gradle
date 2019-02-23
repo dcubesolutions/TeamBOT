@@ -29,6 +29,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
     implementation 'com.google.firebase:firebase-auth:16.1.0'
     implementation 'com.google.firebase:firebase-core:16.0.7'
+    implementation 'com.google.firebase:firebase-storage:16.0.5'
     implementation 'com.google.firebase:firebase-database:16.0.6'
     implementation 'com.jcminarro:RoundKornerLayouts:0.2.0'
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'

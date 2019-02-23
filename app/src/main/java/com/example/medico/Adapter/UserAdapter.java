@@ -42,11 +42,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
         final User user=mUser.get(i);
         viewHolder.fName.setText(user.getfName());
-        if (user.getImageUrl().equals("default")){
+       /* if (user.getImageUrl().equals("default")){
             viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
         }else{
             Glide.with(mContext).load(user.getImageUrl()).into(viewHolder.profile_image);
-        }
+        }*/
+
+        viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
 
         if(isChat) {
             if (user.getStatus().equals("online")) {
