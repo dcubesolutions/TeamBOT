@@ -1,12 +1,13 @@
 package com.example.medico.Model;
 
 public class User {
-    String fName;
-    String lName;
-    String mid;
-    String email;
-    String id;
-    String imageUrl;
+    private String fName;
+    private String lName;
+    private String mid;
+    private String email;
+    private String id;
+    private String imageUrl;
+    private String status;
     public String getfName() {
         return fName;
     }
@@ -55,13 +56,22 @@ public class User {
         this.imageUrl = imageUrl;
     }
 
-    public User(String fName, String lName, String mid, String email, String id, String imageUrl) {
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public User(String fName, String lName, String mid, String email, String id, String imageUrl, String status) {
         this.fName = fName;
         this.lName = lName;
         this.mid = mid;
         this.email = email;
         this.id = id;
         this.imageUrl = imageUrl;
+        this.status = status;
     }
 
     public User() {

@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -34,14 +36,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MessageActivity extends AppCompatActivity {
 
     CircleImageView profile_image;
-    TextView fName;
+    TextView username;
 
     FirebaseUser fuser;
     DatabaseReference reference;
-
+   // FirebaseAuth mAuth;
     ImageButton btn_send;
     EditText text_send;
-
+    String user_id;
     MessageAdapter messageAdapter;
     List<Chat> mchat;
 
@@ -61,7 +63,7 @@ public class MessageActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                finish();
+                startActivity(new Intent(MessageActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
@@ -71,14 +73,18 @@ public class MessageActivity extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+
+       // user_id= mAuth.getCurrentUser().getUid();
+
+
         profile_image=findViewById(R.id.profile_image);
-        fName=findViewById(R.id.fName);
+        username=findViewById(R.id.username);
         btn_send=findViewById(R.id.btn_send);
         text_send=findViewById(R.id.text_send);
 
 
         intent=getIntent();
-        final String userid=intent.getStringExtra("userid");
+        final String userid=intent.getStringExtra("id");
         fuser= FirebaseAuth.getInstance().getCurrentUser();
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,18 +100,20 @@ public class MessageActivity extends AppCompatActivity {
         });
 
 
-        reference= FirebaseDatabase.getInstance().getReference("Users").child(userid);
+
+        reference= FirebaseDatabase.getInstance().getReference("user_data").child(userid);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user=dataSnapshot.getValue(User.class);
-                fName.setText(user.getfName());
-                if(user.getImageUrl().equals("default")){
-                    profile_image.setImageResource(R.mipmap.ic_launcher);
-                }else {
+                username.setText(user.getfName());
+                if(user.getImageUrl().equals("defalut")){
+                profile_image.setImageResource(R.mipmap.ic_launcher);
+                }else{
                     Glide.with(MessageActivity.this).load(user.getImageUrl()).into(profile_image);
                 }
+
                 readMessages(fuser.getUid(),userid,user.getImageUrl());
             }
 
@@ -120,7 +128,7 @@ public class MessageActivity extends AppCompatActivity {
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference();
         HashMap<String,Object> hashmap=new HashMap<>();
         hashmap.put("sender",sender);
-        hashmap.put("reeciver",receiver);
+        hashmap.put("receiver",receiver);
         hashmap.put("message",message);
 
         reference.child("Chats").push().setValue(hashmap);
@@ -130,7 +138,7 @@ public class MessageActivity extends AppCompatActivity {
     private  void readMessages(final String myid, final String userid, final String imageurl){
 
         mchat = new ArrayList<>();
-            reference=FirebaseDatabase.getInstance().getReference("Chat");
+            reference=FirebaseDatabase.getInstance().getReference("Chats");
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -152,5 +160,26 @@ public class MessageActivity extends AppCompatActivity {
 
                 }
             });
+    }
+
+
+    private void status(String status){
+        reference= FirebaseDatabase.getInstance().getReference("user_data").child(fuser.getUid());
+        HashMap<String,Object> hashMap=new HashMap<>();
+        hashMap.put("status",status);
+
+        reference.updateChildren(hashMap);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("offline");
     }
 }

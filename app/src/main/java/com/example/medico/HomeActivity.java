@@ -28,7 +28,7 @@ public class HomeActivity extends AppCompatActivity
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(R.id.frmLyt,new homeFrag());
+    //    ft.replace(R.id.frmLyt,new homeFrag());
         ft.commit();
 
 
@@ -90,19 +90,20 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            ft.replace(R.id.frmLyt,new homeFrag());
+         //   ft.replace(R.id.frmLyt,new homeFrag());
             ft.commit();
         } else if (id == R.id.nav_chat) {
             startActivity(new Intent(HomeActivity.this,ChatActivity.class));
 
         } else if (id == R.id.nav_settings) {
-            ft.replace(R.id.frmLyt,new homeFrag());
+       //     ft.replace(R.id.frmLyt,new homeFrag());
             ft.commit();
         } else if (id == R.id.nav_about) {
 
         } else if (id == R.id.nav_logut) {
             FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(HomeActivity.this,LogIn.class));
+            startActivity(new Intent(HomeActivity.this,LogIn.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            return true;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

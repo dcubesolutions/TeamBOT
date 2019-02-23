@@ -43,7 +43,7 @@ public class SignUp extends AppCompatActivity {
     private FirebaseAuth mAuth;
     DatabaseReference databaseUser;
     ProgressBar progressBar2;
-    String ImageUrl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,18 +58,13 @@ public class SignUp extends AppCompatActivity {
         TvLogin= (TextView) findViewById(R.id.TvLogin);
         progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
         mAuth = FirebaseAuth.getInstance();
-        progressBar2.setVisibility(View.INVISIBLE);
 
         databaseUser = FirebaseDatabase.getInstance().getReference("user_data");
 
         BtnSuSignUp.setOnClickListener(new View.OnClickListener() {
-
-
             @Override
             public void onClick(View view) {
-                progressBar2.setVisibility(View.VISIBLE);
                 if (FName.getText().toString().isEmpty()) {
-
                     Toast.makeText(getApplicationContext(), "FirstName Required..!!", Toast.LENGTH_SHORT).show();
                     FName.setError("FirstName Required");
                     return;
@@ -111,16 +106,15 @@ public class SignUp extends AppCompatActivity {
                     return;
                 }
                 else{
-                    String email=Email.getText().toString().trim();
-                    String password=Password.getText().toString().trim();
-                    String fName= FName.getText().toString().trim();
-                    String lName = LName.getText().toString().trim();
-                    String mid = ContactNo.getText().toString().trim();
-
-                    insert_db(fName,lName,mid,email);
-
+                    progressBar2.setVisibility(View.VISIBLE);
+                   final String email=Email.getText().toString().trim();
+                   final String password=Password.getText().toString().trim();
+                   final String fName= FName.getText().toString().trim();
+                   final String lName = LName.getText().toString().trim();
+                   final String mid = ContactNo.getText().toString().trim();
+                   final String status="offline";
+                   final String imageURL="default";
                     mAuth = FirebaseAuth.getInstance();
-                    FirebaseUser user= mAuth.getCurrentUser();
 
                     mAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -132,7 +126,9 @@ public class SignUp extends AppCompatActivity {
                                         Log.d(String.valueOf(SignUp.this), "createUserWithEmail:success");
                                         Toast.makeText(SignUp.this, "Successfully Registered",
                                                 Toast.LENGTH_SHORT).show();
+                                        insert_db(fName,lName,mid,email);
                                         startActivity(new Intent(SignUp.this,LogIn.class));
+
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Log.w(String.valueOf(SignUp.this), "createUserWithEmail:failure");
@@ -145,6 +141,7 @@ public class SignUp extends AppCompatActivity {
                                 }
                             });
                 }
+                progressBar2.setVisibility(View.INVISIBLE);
             }
         });
         TvLogin.setOnClickListener(new View.OnClickListener() {
@@ -163,10 +160,10 @@ public class SignUp extends AppCompatActivity {
 
 
     }
-
+    //String user= mAuth.getCurrentUser().getUid();
     public void insert_db(String fName,String lName,String mid,String email){
-        String id = databaseUser.push().getKey();
-        User user_db = new User(fName,lName,mid,email,id,ImageUrl);
+        String id= mAuth.getCurrentUser().getUid();
+        User user_db = new User(fName,lName,mid,email,id,"default","offline");
         databaseUser.child(id).setValue(user_db);
     }
 
@@ -212,10 +209,7 @@ public class SignUp extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
                 }
-
             }
 
             @Override

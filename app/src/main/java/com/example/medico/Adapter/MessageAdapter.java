@@ -3,6 +3,7 @@ package com.example.medico.Adapter;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
-public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
+public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder>{
 
     public static final int MSG_TYPE_LEFT = 0;
     public static final int MSG_TYPE_RIGHT = 1;
@@ -58,7 +59,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         if (imageurl.equals("default")){
             viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
         } else{
-
             Glide.with(mContext).load(imageurl).into(viewHolder.profile_image);
         }
 

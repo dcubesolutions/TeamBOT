@@ -47,7 +47,7 @@ public class UsersFragment extends Fragment {
 
     private void readUsers(){
         final FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("User");
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("user_data");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -63,7 +63,7 @@ public class UsersFragment extends Fragment {
                     }
                 }
 
-                userAdapter =new UserAdapter(getContext(),mUsers);
+                userAdapter =new UserAdapter(getContext(),mUsers,false);
                 recyclerView.setAdapter(userAdapter);
             }
 

@@ -31,8 +31,8 @@ public class ChatsFragment extends Fragment {
     private UserAdapter userAdapter;
     private List<User> mUser;
 
-    FirebaseUser fuser;
-    DatabaseReference reference;
+    private FirebaseUser fuser;
+    private DatabaseReference reference;
 
     private List<String> usersList;
 
@@ -83,7 +83,7 @@ public class ChatsFragment extends Fragment {
 
     private void readChats(){
         mUser=new ArrayList<>();
-        reference=FirebaseDatabase.getInstance().getReference("Users");
+        reference=FirebaseDatabase.getInstance().getReference("user_data");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -107,7 +107,7 @@ public class ChatsFragment extends Fragment {
                     }
                 }
 
-                userAdapter=new UserAdapter(getContext(),mUser);
+                userAdapter=new UserAdapter(getContext(),mUser,true);
                 recyclerView.setAdapter(userAdapter);
             }
 
