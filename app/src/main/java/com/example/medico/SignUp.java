@@ -1,13 +1,18 @@
 package com.example.medico;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +20,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ProgressBar;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 
 import org.json.JSONException;
@@ -41,7 +49,9 @@ public class SignUp extends AppCompatActivity {
     EditText FName, LName,ContactNo, Password, Email, CPassword;
     TextView TvLogin;
     boolean twice;
-    Spinner category;
+    Spinner language,category;
+    Locale myLocale;
+    String currentLanguage, currentLang;
     final String TAG=getClass().getName();
     private FirebaseAuth mAuth;
     DatabaseReference databaseUser;
@@ -60,13 +70,17 @@ public class SignUp extends AppCompatActivity {
         Email = (EditText) findViewById(R.id.Email);
         TvLogin= (TextView) findViewById(R.id.TvLogin);
         category=(Spinner)findViewById(R.id.category);
+        language=(Spinner)findViewById(R.id.language);
         progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
         mAuth = FirebaseAuth.getInstance();
 
         ArrayAdapter<String> newadapter = new ArrayAdapter<String>(
-                SignUp.this, R.layout.spinner_layout_test, getResources().getStringArray(R.array.category)
-        );
-        category.setAdapter(newadapter);
+                SignUp.this, R.layout.spinner_layout_test, getResources().getStringArray(R.array.lang));
+        language.setAdapter(newadapter);
+
+        ArrayAdapter<String> newadapter2 = new ArrayAdapter<String>(
+                SignUp.this, R.layout.spinner_layout_test, getResources().getStringArray(R.array.category));
+        category.setAdapter(newadapter2);
 
         databaseUser = FirebaseDatabase.getInstance().getReference("user_data");
         progressBar2.setVisibility(View.INVISIBLE);
@@ -166,9 +180,43 @@ public class SignUp extends AppCompatActivity {
             }
         });*/
 
+        language.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                switch (position) {
+                    case 0:
+                        break;
+                    case 1:
+                        setLocale("en");
+                        break;
+                    case 2:
+                        setLocale("hi");
+                        break;
+                }
+            }
 
-
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
     }
+
+    public void setLocale(String localeName) {
+        if (!localeName.equals(currentLanguage)) {
+            myLocale = new Locale(localeName);
+            Resources res = getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+            res.updateConfiguration(conf, dm);
+            Intent refresh = new Intent(this, MainActivity.class);
+            refresh.putExtra(currentLang, localeName);
+            startActivity(refresh);
+        } else {
+            Toast.makeText(SignUp.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     //String user= mAuth.getCurrentUser().getUid();
     public void insert_db(String fName,String lName,String mid,String email){
         String id= mAuth.getCurrentUser().getUid();

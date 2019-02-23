@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Log In"
+                android:text="@string/log_in"
                 android:textColor="#FFFFFF"
                 android:textSize="50dp"
                 android:textStyle="bold" />
@@ -42,7 +42,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:background="@drawable/roundcorner"
-                android:hint=" Email"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:paddingLeft="15dp"
                 android:textColorHint="#9D90D0"
@@ -55,7 +55,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:background="@drawable/roundcorner"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:paddingLeft="15dp"
                 android:textColorHint="#9D90D0"
@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:gravity="center"
-                    android:text="Forgot Password?"
+                    android:text="@string/forgot_password"
                     android:textColor="#7968C0"
                     android:textSize="15dp"
                     android:textStyle="" />
@@ -84,7 +84,7 @@
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:layout_marginTop="25dp"
                     android:background="@drawable/registerbtn1"
-                    android:text="Log IN"
+                    android:text="@string/log_in"
                     android:textColor="#FFF"
                     android:textStyle="bold" />
 
@@ -94,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:text="Dont Have an Account?"
+                    android:text="@string/dont_have_an_account"
                     android:textColor="#7968C0"
                     android:textSize="15dp"
                     android:textStyle="" />

@@ -7,24 +7,24 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/home"
-            android:title="Home"
+            android:title="@string/home"
             />
         <item
             android:id="@+id/nav_chat"
             android:icon="@drawable/chat"
-            android:title="Chat" />
+            android:title="@string/chat" />
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/settings"
-            android:title="Settings" />
+            android:title="@string/settings" />
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/about"
-            android:title="About" />
+            android:title="@string/about" />
         <item
             android:id="@+id/nav_logut"
             android:icon="@drawable/logouticn"
-            android:title="Log Out" />
+            android:title="@string/log_out" />
     </group>
 
    <!-- <item android:title="Communicate">
