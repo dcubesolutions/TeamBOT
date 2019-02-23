@@ -28,7 +28,7 @@ public class HomeActivity extends AppCompatActivity
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
-    //    ft.replace(R.id.frmLyt,new homeFrag());
+      ft.replace(R.id.frmLyt,new homeFrag());
         ft.commit();
 
 

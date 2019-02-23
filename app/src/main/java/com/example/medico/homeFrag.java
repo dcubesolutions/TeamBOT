@@ -29,7 +29,7 @@ import java.util.ListIterator;
 /**
  * A simple {@link Fragment} subclass.
  */
-/*public class homeFrag extends Fragment {
+public class homeFrag extends Fragment {
 
     private RecyclerView blogListView;
     private List<BlogPost> blog_list;
@@ -76,4 +76,3 @@ import java.util.ListIterator;
         ((HomeActivity) getActivity()).setActionBarTitle("Post");
     }
 }
-*/
