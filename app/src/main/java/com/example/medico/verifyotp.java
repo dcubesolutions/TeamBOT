@@ -39,7 +39,7 @@ public class verifyotp extends AppCompatActivity {
         Firebase.setAndroidContext(this);
         codeText=(EditText)findViewById(R.id.codeText);
         sendBtn=(Button)findViewById(R.id.sendBtn);
-        Intent intent=getIntent();
+        final Intent intent=getIntent();
         final String phoneText = intent.getStringExtra("phoneNumber");
         mAuth=FirebaseAuth.getInstance();
         sendBtn.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +47,7 @@ public class verifyotp extends AppCompatActivity {
             public void onClick(View view) {
                 sendBtn.setEnabled(false);
                 if (btnType == 0) {
+                    String phoneText=intent.getStringExtra("phoneNumber");
                     PhoneAuthProvider.getInstance().verifyPhoneNumber(
                             phoneText,        // Phone number to verify
                             60,                 // Timeout duration

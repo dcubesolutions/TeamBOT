@@ -79,13 +79,12 @@ public class newPost extends AppCompatActivity {
         postTitle = findViewById(R.id.postTitle);
         postSubject= findViewById(R.id.postSubject);
         floatingPost = findViewById(R.id.floatingPost);
-        postImage= findViewById(R.id.postCertificateImage);
+        postImage= findViewById(R.id.postImage);
         progressBarImage=findViewById(R.id.progressBarImage);
 
         postImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
 
                     if(ContextCompat.checkSelfPermission(newPost.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){

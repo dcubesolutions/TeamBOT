@@ -38,11 +38,13 @@ public class SignUp extends AppCompatActivity {
     TextView TvLogin;
     boolean twice;
     Spinner language,category;
+    String spinnerValue;
     int cat = 0;
     Locale myLocale;
     String currentLanguage, currentLang;
     final String TAG=getClass().getName();
     private FirebaseAuth mAuth;
+    private String Degree, ClinicNo;
     //private FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseUser;
     ProgressBar progressBar2;
@@ -78,17 +80,8 @@ public class SignUp extends AppCompatActivity {
         category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                switch (position) {
-                    case 0:
-                        cat = 0;
-                        break;
-                    case 1:
-                        cat =1;
-                        break;
-                    case 2:
-                        cat = 2;
-                        break;
-                }
+
+                spinnerValue = adapterView.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -162,14 +155,33 @@ public class SignUp extends AppCompatActivity {
                                         Log.d(String.valueOf(SignUp.this), "createUserWithEmail:success");
                                                 String id= mAuth.getCurrentUser().getUid();
                                                 databaseUser = FirebaseDatabase.getInstance().getReference("user_data");
-                                                DatabaseReference mRef= databaseUser.child("patients").child(id);
-                                                User user_db = new User(fName,lName,mid,email,id,"default","offline");
-                                                mRef.setValue(user_db);
-                                                Toast.makeText(SignUp.this, "Patient Successfully Registered", Toast.LENGTH_SHORT).show();
-                                                Intent intent;
-                                                intent = new Intent(SignUp.this,verifyotp.class);
-                                                intent.putExtra("phoneNumber",mid);
-                                                startActivity(intent);
+                                                if(spinnerValue.equals("Patient")){
+
+                                                        DatabaseReference mRef= databaseUser.child(id);
+                                                        User user_db = new User(fName,lName,mid,email,id,"default","offline",Degree, ClinicNo);
+                                                        mRef.setValue(user_db);
+                                                        Toast.makeText(SignUp.this, "Patient Successfully Registered", Toast.LENGTH_SHORT).show();
+                                                        Intent intent;
+                                                        intent = new Intent(SignUp.this,verifyotp.class);
+                                                        intent.putExtra("phoneNumber",mid);
+                                                         startActivity(intent);
+                                                }
+                                                else if(spinnerValue.equals("Doctor")){
+                                                    Toast.makeText(SignUp.this, "Doctor Successfully Registered", Toast.LENGTH_SHORT).show();
+                                                    Intent intent;
+                                                    intent = new Intent(SignUp.this,doctorDetails.class);
+                                                    intent.putExtra("phoneNumber",mid);
+                                                    intent.putExtra("fName",fName);
+                                                    intent.putExtra("lname",lName);
+                                                    intent.putExtra("email",email);
+                                                    intent.putExtra("id",id);
+                                                    intent.putExtra("imageURL",imageURL);
+                                                    intent.putExtra("status",status);
+                                                    startActivity(intent);
+                                                }
+                                                else if(spinnerValue.equals("Select Category")){
+                                                    Toast.makeText(SignUp.this, "Please Select a Category!", Toast.LENGTH_SHORT).show();
+                                                }
                                //         insert_db(fName,lName,mid,email);
                                       /*  Intent intent=new Intent(SignUp.this,verifyotp.class);
                                         intent.putExtra("phoneNumber",mid);
@@ -192,19 +204,18 @@ public class SignUp extends AppCompatActivity {
                 progressBar2.setVisibility(View.INVISIBLE);
             }
         });
-        /*TvLogin.setOnClickListener(new View.OnClickListener() {
+        TvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(SignUp.this,LogIn.class));
             }
-        });*/
+        });
        /* BtnSuCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CleanEditText();
             }
         });*/
-
 
         language.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
