@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/curvedbgfull"
     android:orientation="vertical"
-    android:layout_gravity="center">
+	android:layout_gravity="center">
+    
+    >
     <ImageView
         android:layout_width="235dp"
         android:layout_height="85dp"
@@ -19,11 +21,12 @@
         android:paddingTop="120dp">
 
         <TextView
+            android:id="@+id/SignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/sign_up"
+            android:text="@string/SignUp"
             android:textColor="#FFFFFF"
             android:textSize="50dp"
             android:textStyle="bold" />
@@ -51,6 +54,7 @@
                 android:hint="@string/first_name"
                 android:inputType="text"
                 android:paddingLeft="20dp"
+                android:text="@string/FName"
                 android:textColorHint="#9D90D0"
                 android:textSize="20dp" />
 
@@ -64,6 +68,7 @@
                 android:hint="@string/last_name"
                 android:inputType="text"
                 android:paddingLeft="20dp"
+                android:text="@string/LName"
                 android:textColorHint="#9D90D0"
                 android:textSize="20dp" />
 
@@ -77,6 +82,7 @@
                 android:hint="@string/mobileno"
                 android:inputType="numberDecimal|phone"
                 android:paddingLeft="20dp"
+                android:text="@string/ContactNo"
                 android:textColorHint="#9D90D0"
                 android:textSize="20dp" />
 
@@ -90,6 +96,7 @@
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:paddingLeft="20dp"
+                android:text="@string/Email"
                 android:textColorHint="#9D90D0"
                 android:textSize="20dp" />
 
@@ -103,6 +110,7 @@
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:paddingLeft="20dp"
+                android:text="@string/Password"
                 android:textColorHint="#9D90D0"
                 android:textSize="20dp" />
 
@@ -116,6 +124,7 @@
                 android:hint="@string/confirm_password"
                 android:inputType="textPassword"
                 android:paddingLeft="20dp"
+                android:text="@string/CPassword"
                 android:textColorHint="#9D90D0"
                 android:textSize="20dp" />
 
@@ -163,7 +172,7 @@
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:layout_marginTop="25dp"
                     android:background="@drawable/registerbtn1"
-                    android:text="@string/register"
+                    android:text="@string/Register"
                     android:textColor="#FFF"
                     android:textStyle="bold" />
 
@@ -182,22 +191,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
-            android:paddingTop="120dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Sign Up"
-                android:textColor="#FFFFFF"
-                android:textSize="50dp"
-                android:textStyle="bold" />
-        </LinearLayout>
 
     <!--<FrameLayout
         android:id="@+id/FrmLyt2"

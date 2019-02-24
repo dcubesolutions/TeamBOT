@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application xmlns:tools="http://schemas.android.com/tools"
+        android:name=".Helper.MainApplication"
         android:allowBackup="true"
         android:icon="@drawable/medicoicon"
         android:label="@string/app_name"
@@ -36,9 +37,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".LogIn"
-            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="stateVisible|adjustPan"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustPan" />
+            android:configChanges="orientation|keyboardHidden"
+            />
         <activity
             android:name=".MessageActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -52,12 +54,12 @@
             android:name=".HomeActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MainActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait">
+            android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
