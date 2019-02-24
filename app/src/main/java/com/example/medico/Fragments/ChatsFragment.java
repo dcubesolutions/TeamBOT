@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.example.medico.Adapter.UserAdapter;
 import com.example.medico.Model.Chat;
 import com.example.medico.Model.User;
+import com.example.medico.Notifications.Token;
 import com.example.medico.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,6 +21,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,25 +53,21 @@ public class ChatsFragment extends Fragment {
         fuser= FirebaseAuth.getInstance().getCurrentUser();
 
         usersList=new ArrayList<>();
-        reference = FirebaseDatabase.getInstance().getReference("Chats");
 
+        reference =FirebaseDatabase.getInstance().getReference("Chats");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 usersList.clear();
-
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Chat chat=snapshot.getValue(Chat.class);
-
-                    if(chat.getSender().equals(fuser.getUid())){
-
+                    if (chat.getSender().equals(fuser.getUid())){
                         usersList.add(chat.getReceiver());
                     }
-                    if(chat.getReceiver().equals(fuser.getUid())){
+                    if (chat.getReceiver().equals(fuser.getUid())){
                         usersList.add(chat.getSender());
                     }
                 }
-
                 readChats();
             }
 
@@ -78,8 +77,18 @@ public class ChatsFragment extends Fragment {
             }
         });
 
+
+        updateToken(FirebaseInstanceId.getInstance().getToken());
+
         return view;
     }
+
+    private void updateToken(String token){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Tokens");
+        Token token1=new Token(token);
+        reference.child(fuser.getUid()).setValue(token1);
+    }
+
 
     private void readChats(){
         mUser=new ArrayList<>();
@@ -117,5 +126,7 @@ public class ChatsFragment extends Fragment {
             }
         });
     }
+
+
 
 }

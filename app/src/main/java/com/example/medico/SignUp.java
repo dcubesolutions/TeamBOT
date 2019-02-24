@@ -1,5 +1,6 @@
 package com.example.medico;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -56,6 +57,7 @@ public class SignUp extends AppCompatActivity {
     private FirebaseAuth mAuth;
     DatabaseReference databaseUser;
     ProgressBar progressBar2;
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +73,6 @@ public class SignUp extends AppCompatActivity {
         TvLogin= (TextView) findViewById(R.id.TvLogin);
         category=(Spinner)findViewById(R.id.category);
         language=(Spinner)findViewById(R.id.language);
-        progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
         mAuth = FirebaseAuth.getInstance();
 
         ArrayAdapter<String> newadapter = new ArrayAdapter<String>(
@@ -83,53 +84,66 @@ public class SignUp extends AppCompatActivity {
         category.setAdapter(newadapter2);
 
         databaseUser = FirebaseDatabase.getInstance().getReference("user_data");
-        progressBar2.setVisibility(View.INVISIBLE);
+
         BtnSuSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                    dialog=new ProgressDialog(SignUp.this);
+                    dialog.setMessage("Loading");
+                    dialog.show();
                 if (FName.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "FirstName Required..!!", Toast.LENGTH_SHORT).show();
                     FName.setError("FirstName Required");
+                    dialog.dismiss();
                     return;
                 } else if (LName.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "LastName Required..!!", Toast.LENGTH_SHORT).show();
                     LName.setError("LastName Required");
+                    dialog.dismiss();
                     return;
                 }
                 else if (ContactNo.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Contact Required..!!", Toast.LENGTH_SHORT).show();
                     ContactNo.setError("Contact Required");
+                    dialog.dismiss();
 
                     return;
                 } else if (!isContactNoValid(ContactNo.getText().toString().trim())) {
                     Toast.makeText(getApplicationContext(), "ContactNo invalid..!!", Toast.LENGTH_SHORT).show();
                     ContactNo.setError("Contact Invalid");
+                    dialog.dismiss();
                     return;
                 } else if (Email.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Email Required..!!", Toast.LENGTH_SHORT).show();
                     Email.setError("Email Required");
+                    dialog.dismiss();
                     return;
                 } else if (!Patterns.EMAIL_ADDRESS.matcher(Email.getText().toString().trim()).matches()) {
                     Toast.makeText(getApplicationContext(), "Email Invaild..!!", Toast.LENGTH_SHORT).show();
                     Email.setError("Email Invalid");
+                    dialog.dismiss();
                     return;
                 } else if (Password.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Password Required..!!", Toast.LENGTH_SHORT).show();
                     Password.setError("Password Required");
+                    dialog.dismiss();
                     return;
                 }
                 else if (CPassword.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Password Required..!!", Toast.LENGTH_SHORT).show();
                     Password.setError("Password Required");
+                    dialog.dismiss();
                     return;
                 }
                 else if (!(Password.getText().toString()).equals(CPassword.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "Password not match", Toast.LENGTH_SHORT).show();
                     CPassword.setError("Password not match");
+                    dialog.dismiss();
                     return;
                 }
                 else{
-                    progressBar2.setVisibility(View.VISIBLE);
+
+//                    progressBar2.setVisibility(View.VISIBLE);
                    final String email=Email.getText().toString().trim();
                    final String password=Password.getText().toString().trim();
                    final String fName= FName.getText().toString().trim();
@@ -144,7 +158,8 @@ public class SignUp extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
+
+                                        //Sign in success, update UI with the signed-in user's information
                                         BtnSuSignUp.setEnabled(false);
                                         Log.d(String.valueOf(SignUp.this), "createUserWithEmail:success");
                                         Toast.makeText(SignUp.this, "Successfully Registered",
@@ -164,7 +179,6 @@ public class SignUp extends AppCompatActivity {
                                 }
                             });
                 }
-                progressBar2.setVisibility(View.INVISIBLE);
             }
         });
         TvLogin.setOnClickListener(new View.OnClickListener() {
