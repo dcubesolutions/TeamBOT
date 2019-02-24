@@ -96,7 +96,7 @@ public class HomeActivity extends AppCompatActivity
             startActivity(new Intent(HomeActivity.this,ChatActivity.class));
 
         } else if (id == R.id.nav_settings) {
-       //     ft.replace(R.id.frmLyt,new homeFrag());
+            startActivity(new Intent(HomeActivity.this,settings.class));
             ft.commit();
         } else if (id == R.id.nav_about) {
 
@@ -110,8 +110,7 @@ public class HomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
     public void setActionBarTitle(String title) {
-        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setTitle(R.string.post_title);
     }
 }

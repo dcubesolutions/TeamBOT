@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Build;
 
 import com.example.medico.Model.User;
-import com.google.android.gms.common.data.DataBufferObserverSet;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -25,10 +24,6 @@ import id.zelory.compressor.Compressor;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldValue;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.ServerTimestamp;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -39,16 +34,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import com.example.medico.Model.*;
-import com.google.firebase.auth.FirebaseAuth;
+
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
@@ -74,7 +66,7 @@ public class newPost extends AppCompatActivity {
         setContentView(R.layout.activity_new_post);
         newPostToolbar=findViewById(R.id.newPostToolbar);
         setSupportActionBar(newPostToolbar);
-        getSupportActionBar().setTitle("Create new Post");
+        getSupportActionBar().setTitle(R.string.createnewpost);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         User user=new User();
@@ -87,7 +79,7 @@ public class newPost extends AppCompatActivity {
         postTitle = findViewById(R.id.postTitle);
         postSubject= findViewById(R.id.postSubject);
         floatingPost = findViewById(R.id.floatingPost);
-        postImage= findViewById(R.id.postImage);
+        postImage= findViewById(R.id.postCertificateImage);
         progressBarImage=findViewById(R.id.progressBarImage);
 
         postImage.setOnClickListener(new View.OnClickListener() {
