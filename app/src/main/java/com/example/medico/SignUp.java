@@ -39,6 +39,7 @@ public class SignUp extends AppCompatActivity {
     TextView TvLogin;
     boolean twice;
     Spinner language,category;
+    String spinnerValue;
     int cat = 0;
     Locale myLocale;
     String currentLanguage, currentLang;
@@ -63,6 +64,7 @@ public class SignUp extends AppCompatActivity {
         TvLogin= (TextView) findViewById(R.id.TvLogin);
         category=(Spinner)findViewById(R.id.category);
         language=(Spinner)findViewById(R.id.language);
+        progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
         mAuth = FirebaseAuth.getInstance();
 
         ArrayAdapter<String> newadapter = new ArrayAdapter<String>(
@@ -73,23 +75,14 @@ public class SignUp extends AppCompatActivity {
                 SignUp.this, R.layout.spinner_layout_test, getResources().getStringArray(R.array.category));
         category.setAdapter(newadapter2);
 
-       // databaseUser = FirebaseDatabase.getInstance().getReference("user_data");
-
+        // databaseUser = FirebaseDatabase.getInstance().getReference("user_data");
+//        progressBar2.setVisibility(View.INVISIBLE);
 
         category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                switch (position) {
-                    case 0:
-                        cat = 0;
-                        break;
-                    case 1:
-                        cat =1;
-                        break;
-                    case 2:
-                        cat = 2;
-                        break;
-                }
+
+                spinnerValue = adapterView.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -99,10 +92,11 @@ public class SignUp extends AppCompatActivity {
 
         BtnSuSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View view) {
-                    dialog=new ProgressDialog(SignUp.this);
-                    dialog.setMessage("Loading");
-                    dialog.show();
+                dialog=new ProgressDialog(SignUp.this);
+                dialog.setMessage("Loading");
+                dialog.show();
                 if (FName.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "FirstName Required..!!", Toast.LENGTH_SHORT).show();
                     FName.setError("FirstName Required");
@@ -118,14 +112,13 @@ public class SignUp extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Contact Required..!!", Toast.LENGTH_SHORT).show();
                     ContactNo.setError("Contact Required");
                     dialog.dismiss();
-
                     return;
                 } /*else if (!isContactNoValid(ContactNo.getText().toString().trim())) {
                     Toast.makeText(getApplicationContext(), "ContactNo invalid..!!", Toast.LENGTH_SHORT).show();
                     ContactNo.setError("Contact Invalid");
-                    dialog.dismiss();
-                    return;
-                } else if (Email.getText().toString().isEmpty()) {
+                    return;*/
+
+                else if (Email.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Email Required..!!", Toast.LENGTH_SHORT).show();
                     Email.setError("Email Required");
                     dialog.dismiss();
@@ -154,15 +147,14 @@ public class SignUp extends AppCompatActivity {
                     return;
                 }
                 else{
-
-//                    progressBar2.setVisibility(View.VISIBLE);
-                   final String email=Email.getText().toString().trim();
-                   final String password=Password.getText().toString().trim();
-                   final String fName= FName.getText().toString().trim();
-                   final String lName = LName.getText().toString().trim();
-                   final String mid = ContactNo.getText().toString();
-                   final String status="offline";
-                   final String imageURL="default";
+                   // progressBar2.setVisibility(View.VISIBLE);
+                    final String email=Email.getText().toString().trim();
+                    final String password=Password.getText().toString().trim();
+                    final String fName= FName.getText().toString().trim();
+                    final String lName = LName.getText().toString().trim();
+                    final String mid = ContactNo.getText().toString();
+                    final String status="offline";
+                    final String imageURL="default";
                     mAuth = FirebaseAuth.getInstance();
 
                     mAuth.createUserWithEmailAndPassword(email, password)
@@ -170,21 +162,36 @@ public class SignUp extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-
-                                        //Sign in success, update UI with the signed-in user's information
+                                        // Sign in success, update UI with the signed-in user's information
                                         BtnSuSignUp.setEnabled(false);
                                         Log.d(String.valueOf(SignUp.this), "createUserWithEmail:success");
-                                                String id= mAuth.getCurrentUser().getUid();
-                                                databaseUser = FirebaseDatabase.getInstance().getReference("user_data");
-                                                DatabaseReference mRef= databaseUser.child("patients").child(id);
-                                                User user_db = new User(fName,lName,mid,email,id,"default","offline");
-                                                mRef.setValue(user_db);
-                                                Toast.makeText(SignUp.this, "Patient Successfully Registered", Toast.LENGTH_SHORT).show();
-                                                Intent intent;
-                                                intent = new Intent(SignUp.this,verifyotp.class);
-                                                intent.putExtra("phoneNumber",mid);
-                                                startActivity(intent);
-                               //         insert_db(fName,lName,mid,email);
+                                        String id= mAuth.getCurrentUser().getUid();
+                                        databaseUser = FirebaseDatabase.getInstance().getReference("user_data");
+                                        if(spinnerValue.equals("Patient")){
+
+                                            DatabaseReference mRef= databaseUser.child("patients").child(id);
+                                            User user_db = new User(fName,lName,mid,email,id,"default","offline");
+                                            mRef.setValue(user_db);
+                                            Toast.makeText(SignUp.this, "Patient Successfully Registered", Toast.LENGTH_SHORT).show();
+                                            Intent intent;
+                                            intent = new Intent(SignUp.this,verifyotp.class);
+                                             intent.putExtra("phoneNumber", mid);
+                                            startActivity(intent);
+                                        }
+                                        else if(spinnerValue.equals("Doctor")){
+                                            DatabaseReference mRef= databaseUser.child("doctors").child(id);
+                                            User user_db = new User(fName,lName,mid,email,id,"default","offline");
+                                            mRef.setValue(user_db);
+                                            Toast.makeText(SignUp.this, "Doctor Successfully Registered", Toast.LENGTH_SHORT).show();
+                                            Intent intent;
+                                            intent = new Intent(SignUp.this,doctorDetails.class);
+                                            intent.putExtra("phoneNumber",mid);
+                                            startActivity(intent);
+                                        }
+                                        else if(spinnerValue.equals("Select Category")){
+                                            Toast.makeText(SignUp.this, "Please Select a Category!", Toast.LENGTH_SHORT).show();
+                                        }
+                                        //         insert_db(fName,lName,mid,email);
                                       /*  Intent intent=new Intent(SignUp.this,verifyotp.class);
                                         intent.putExtra("phoneNumber",mid);
                                         startActivity(intent);*/
@@ -203,6 +210,7 @@ public class SignUp extends AppCompatActivity {
                             });
 
                 }
+               // progressBar2.setVisibility(View.INVISIBLE);
             }
         });
         /*TvLogin.setOnClickListener(new View.OnClickListener() {
@@ -263,20 +271,20 @@ public class SignUp extends AppCompatActivity {
         databaseUser.child(id).setValue(user_db);
     }*/
 
-  /*  public static boolean isContactNoValid(String ConnNo)
-    {
-        String regExpn="\\d{12}";//regEx for contact no.
+    /*  public static boolean isContactNoValid(String ConnNo)
+      {
+          String regExpn="\\d{12}";//regEx for contact no.
 
-        CharSequence inputStr=ConnNo;//to convert string into character sequence.
-        Pattern pattern = Pattern.compile(regExpn,Pattern.CASE_INSENSITIVE);
-        Matcher matcher= pattern.matcher(inputStr);
-        if(matcher.matches())
+          CharSequence inputStr=ConnNo;//to convert string into character sequence.
+          Pattern pattern = Pattern.compile(regExpn,Pattern.CASE_INSENSITIVE);
+          Matcher matcher= pattern.matcher(inputStr);
+          if(matcher.matches())
 
-            return true;
+              return true;
 
-        else
-            return false;
-    }*/
+          else
+              return false;
+      }*/
     public void CleanEditText()
     {
         FName.setText("");
@@ -285,35 +293,35 @@ public class SignUp extends AppCompatActivity {
         Email.setText("");
         Password.setText("");
     }
-   /* @Override
-    protected void onStart(){
+    /* @Override
+     protected void onStart(){
 
-        SignUp.super.onStart();
-        databaseUser.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+         SignUp.super.onStart();
+         databaseUser.addValueEventListener(new ValueEventListener() {
+             @Override
+             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
-//                    System.out.println(ds);
-//                    System.out.println(ds.getValue());
+                 for(DataSnapshot ds : dataSnapshot.getChildren()){
+ //                    System.out.println(ds);
+ //                    System.out.println(ds.getValue());
 
-                    ds.getValue();
-                    try {
-                        JSONObject reader = new JSONObject(ds.getValue().toString());
-                        System.out.println(reader.getString("mid"));
+                     ds.getValue();
+                     try {
+                         JSONObject reader = new JSONObject(ds.getValue().toString());
+                         System.out.println(reader.getString("mid"));
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+                     } catch (JSONException e) {
+                         e.printStackTrace();
+                     }
+                 }
+             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+             @Override
+             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-    }*/
+             }
+         });
+     }*/
     @Override
     public void onBackPressed() {
         Log.d(TAG,"click");
