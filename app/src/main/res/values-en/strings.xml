@@ -45,6 +45,18 @@
     <string name="home">Home</string>
     <string name="log_out">Log Out</string>
     <string name="chat">Chat</string>
-    <string name="settings">Settings</string>
+    <string name="setting">Settings</string>
     <string name="about">About</string>
+
+    <string name="verify">Verification</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="confrim">Confirm</string>
+
+    <string name="postTitle">Title....</string>
+    <string name="postSubject">Subject....</string>
+    <string name="createnewpost">Create New Post</string>
+
+    <string name="degree">Enter Degree</string>
+    <string name="Doctor_details">Enter Doctor Details</string>
+    <string name="clinicmobileno">Clinic Contact No.</string>
 </resources>

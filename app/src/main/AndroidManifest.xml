@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateVisible|adjustPan">
-        <activity android:name=".DiseasesActivity"></activity>
+        <activity android:name=".doctorDetails"></activity>
+        <activity android:name=".verifyotp" />
+        <activity android:name=".settings" />
         <activity
             android:name=".newPost"
             android:configChanges="orientation|keyboardHidden"
@@ -45,6 +47,8 @@
             android:name=".SignUp"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustPan"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity
             android:name=".HomeActivity"
@@ -67,6 +71,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@style/Base.Theme.AppCompat" />
+    </application>
 
         <service
             android:name=".Notifications.MyFirebaseIdService"
