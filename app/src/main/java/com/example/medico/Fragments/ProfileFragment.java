@@ -76,13 +76,12 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user=dataSnapshot.getValue(User.class);
                 username.setText(user.getfName());
-                if(user.getImageUrl().equals("defalut")){
+                if(user.getImageUrl().equals("default")){
                     image_profile.setImageResource(R.mipmap.ic_launcher);
                 }else{
                     Glide.with(getContext()).load(user.getImageUrl()).into(image_profile);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 

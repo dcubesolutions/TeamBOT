@@ -1,275 +1,188 @@
 package com.example.medico.Adapter;
 
+
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Point;
-import android.text.format.DateFormat;
-import android.view.Gravity;
+import android.provider.Settings;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.example.medico.BlogPost;
+
+import com.example.medico.CommentActivity;
 import com.example.medico.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.medico.UploadPosts;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FieldValue;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Field;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-import de.hdodenhof.circleimageview.CircleImageView;
 
-public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapter.ViewHolder> {
+public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapter.MyViewHolder> {
 
-    public List<BlogPost> blog_list;
-    public Context context;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    //FirebaseDatabase firebaseLike;
+    FirebaseAuth mAuth;
+    private Context mContext;
+    private List<UploadPosts> blogList;
+    private boolean mProcess = false;
+    private boolean mProcess1 = false;
 
-    private FirebaseFirestore firebaseFirestore;
-    private FirebaseAuth firebaseAuth;
-
-    public BlogRecyclerAdapter(List<BlogPost> blog_list){
-
-        this.blog_list = blog_list;
-
+    public BlogRecyclerAdapter(Context mContext, List<UploadPosts> blogList) {
+        this.mContext = mContext;
+        this.blogList = blogList;
     }
 
+
+   /* public BlogRecyclerAdapter(FragmentActivity activity, List<UploadPosts> bloglist) {
+    }*/
+
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.blog_list_item, parent, false);
-        context = parent.getContext();
-       // firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseAuth = FirebaseAuth.getInstance();
-        return new ViewHolder(view);
+        //mContext = parent.getContext();
+        mAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Posts");
+        return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull final BlogRecyclerAdapter.MyViewHolder holder, final int position) {
         holder.setIsRecyclable(false);
-
-        //final String blogPostId = blog_list.get(position).BlogPostId;
-        final String currentUserId = firebaseAuth.getCurrentUser().getUid();
-
-        String titleData = blog_list.get(position).getTitle();
-        holder.setDescText(titleData);
-
-        String image_url = blog_list.get(position).getImage_url();
-        String thumbUri = blog_list.get(position).getImage_thumb();
-        holder.setBlogImage(image_url, thumbUri);
-
-        String user_id = blog_list.get(position).getUser_id();
-       /* //User Data will be retrieved here...
-        firebaseFirestore.collection("Users").document(user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        final String blogPostId = blogList.get(position).BlogPostId;
+        holder.postTitle.setText(blogList.get(position).getUploadTitle());
+        Glide.with(mContext).load(blogList.get(position).getUploadImageUrl()).into(holder.imagePost);
+        final UploadPosts uploadPosts=new UploadPosts();
+        holder.imagePost.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
-                if(task.isSuccessful()){
-
-                    String userName = task.getResult().getString("name");
-                    String userImage = task.getResult().getString("image");
-
-                    holder.setUserData(userName, userImage);
-
-
-                } else {
-
-                    //Firebase Exception
-
-                }
-
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, CommentActivity.class);
+                intent.putExtra("image_url",blogList.get(position).getUploadImageUrl());
+                mContext.startActivity(intent);
             }
         });
-
-        try {
-            long millisecond = blog_list.get(position).getTimestamp().getTime();
-            String dateString = DateFormat.format("MM/dd/yyyy", new Date(millisecond)).toString();
-            holder.setTime(dateString);
-        } catch (Exception e) {
-
-            Toast.makeText(context, "Exception : " + e.getMessage(), Toast.LENGTH_SHORT).show();
-
-        }
-
-        //Get Likes Count
-        firebaseFirestore.collection("Posts/" + blogPostId + "/Likes").addSnapshotListener( new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-
-                if(!documentSnapshots.isEmpty()){
-
-                    int count = documentSnapshots.size();
-
-                    holder.updateLikesCount(count);
-
-                } else {
-
-                    holder.updateLikesCount(0);
-
-                }
-
-            }
-        });
-
-
-        //Get Likes
-        firebaseFirestore.collection("Posts/" + blogPostId + "/Likes").document(currentUserId).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
-
-                if(documentSnapshot.exists()){
-
-                    holder.blogLikeBtn.setImageDrawable(context.getDrawable(R.mipmap.action_like_accent));
-
-                } else {
-
-                    holder.blogLikeBtn.setImageDrawable(context.getDrawable(R.mipmap.action_like_gray));
-
-                }
-
-            }
-        });
-
-        //Likes Feature
+        //Glide.with(mContext).load(blogList.get(position).getUserPhoto()).into(holder.imgPostProfile);
+        //long millisecond = (long)blogList.get(position).getTimeStamp();
+        //long d = new Date(millisecond).getTime();
+        // String dateString = DateFormat.format("MM/dd/yyyy",new Date()).toString();
+        // holder.postDate.setText(dateString);
+        holder.setBlogLikeBtn(blogPostId);
+        holder.setBlogLikeCount(blogPostId);
         holder.blogLikeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
 
-                firebaseFirestore.collection("Posts/" + blogPostId + "/Likes").document(currentUserId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                final String currentUserId = mAuth.getCurrentUser().getUid();
+
+               mProcess=true;
+                databaseReference.child(blogPostId).child("Likes").child(currentUserId).addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (mProcess) {
+                            if (dataSnapshot.exists()) {
+                                databaseReference.child(blogPostId).child("Likes").child(currentUserId).removeValue();
+                                mProcess = false;
+                            } else {
+                                final HashMap<String, Object> hashmap = new HashMap<>();
+                                hashmap.put("sender", ServerValue.TIMESTAMP);
+                                databaseReference.child(blogPostId).child("Likes").child(currentUserId).setValue(hashmap);
+                                //holder.blogLikeBtn.setImageDrawable(mContext.getDrawable(R.mipmap.action_like_accent));
+                                mProcess = false;
 
-                        if(!task.getResult().exists()){
-
-                            Map<String, Object> likesMap = new HashMap<>();
-                            likesMap.put("timestamp", FieldValue.serverTimestamp());
-
-                            firebaseFirestore.collection("Posts/" + blogPostId + "/Likes").document(currentUserId).set(likesMap);
-
-                        } else {
-
-                            firebaseFirestore.collection("Posts/" + blogPostId + "/Likes").document(currentUserId).delete();
-
+                            }
                         }
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
                 });
             }
         });
 
-        holder.blogCommentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent commentIntent = new Intent(context, CommentsActivity.class);
-                commentIntent.putExtra("blog_post_id", blogPostId);
-                context.startActivity(commentIntent);
-
-            }
-        });
-
-    }*/
-
     }
+
     @Override
     public int getItemCount() {
-        return blog_list.size();
+        return blogList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private View mView;
+    public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView titleView;
-        private ImageView blogImageView;
-        private TextView blogDate;
-
-        private TextView blogUserName;
-        private CircleImageView blogUserImage;
-
+        TextView postTitle;
+        ImageButton imagePost;
+        TextView postDate;
         private ImageView blogLikeBtn;
         private TextView blogLikeCount;
+        ConstraintLayout parent;
 
-        private ImageView blogCommentBtn;
 
-
-        public ViewHolder(View itemView) {
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            mView = itemView;
+            postTitle = itemView.findViewById(R.id.blogTitle);
+            imagePost = itemView.findViewById(R.id.blogImage);
+            //postDate = itemView.findViewById(R.id.blogdate);
+            blogLikeBtn = itemView.findViewById(R.id.blogLikeBtn);
+            blogLikeCount = itemView.findViewById(R.id.blogLikeCount);
+            mAuth=FirebaseAuth.getInstance();
 
-            blogLikeBtn = mView.findViewById(R.id.blog_like_btn);
-          //  blogCommentBtn = mView.findViewById(R.id.blog_comment_icon);
-
-        }
-
-        public void setDescText(String titleText){
-
-            titleView = mView.findViewById(R.id.postTitle);
-            titleView.setText(titleText);
 
         }
 
-        public void setBlogImage(String downloadUri, String thumbUri){
+        void setBlogLikeBtn(String blogPostId){
+            databaseReference.child(blogPostId).child("Likes").child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               if(dataSnapshot.exists()){
+                   blogLikeBtn.setImageDrawable(mContext.getDrawable(R.drawable.upvoteiconwhite1));
+               }
+               else{
+                  blogLikeBtn.setImageDrawable(mContext.getDrawable(R.drawable.upvoteiconwhite0));
+               }
+                }
 
-            blogImageView = mView.findViewById(R.id.blog_image);
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            RequestOptions requestOptions = new RequestOptions();
-            requestOptions.placeholder(R.drawable.image_placeholder);
-
-            Glide.with(context).applyDefaultRequestOptions(requestOptions).load(downloadUri).thumbnail(
-                    Glide.with(context).load(thumbUri)
-            ).into(blogImageView);
+                }
+            });
 
         }
+        void setBlogLikeCount(String blogPostId){
 
-        public void setTime(String date) {
+            databaseReference.child(blogPostId).child("Likes").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                long count=dataSnapshot.getChildrenCount();
+                blogLikeCount.setText(count+" UpVotes");
+                }
 
-            blogDate = mView.findViewById(R.id.blog_date);
-            blogDate.setText(date);
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-        }
-
-    /*    public void setUserData(String name, String image){
-
-            blogUserImage = mView.findViewById(R.id.blog_user_image);
-            blogUserName = mView.findViewById(R.id.blog_user_name);
-
-            blogUserName.setText(name);
-
-            RequestOptions placeholderOption = new RequestOptions();
-            placeholderOption.placeholder(R.drawable.profile_placeholder);
-
-            Glide.with(context).applyDefaultRequestOptions(placeholderOption).load(image).into(blogUserImage);
-
-        }*/
-
-        public void updateLikesCount(int count){
-
-            blogLikeCount = mView.findViewById(R.id.blog_like_count);
-            blogLikeCount.setText(count + " Likes");
-
+                }
+            });
         }
 
     }
-
 }
+

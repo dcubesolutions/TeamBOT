@@ -26,7 +26,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
             <ImageButton
-                android:id="@+id/blogImage"
+                android:id="@+id/commentImage"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
@@ -45,7 +45,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="64dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
@@ -96,18 +96,23 @@
             app:layout_constraintStart_toEndOf="@+id/blogLikeBtn"
             app:layout_constraintTop_toBottomOf="@+id/blogTitle" />
 
-        <ImageButton
-            android:id="@+id/commentButton"
-            android:layout_width="27dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.947"
-            app:layout_constraintStart_toStartOf="@+id/blogLikeCount"
-            app:srcCompat="@mipmap/action_comment_icon" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="#FFF"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/blogRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
