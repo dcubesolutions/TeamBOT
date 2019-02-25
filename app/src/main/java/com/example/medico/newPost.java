@@ -76,12 +76,12 @@ public class newPost extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         final String userId = mAuth.getCurrentUser().getUid();
-        postImage = findViewById(R.id.postImage);
+        postImage = findViewById(R.id.blogImage);
         postTitle = findViewById(R.id.postTitle);
         postSubject = findViewById(R.id.postSubject);
         floatingPost = findViewById(R.id.floatingPost);
         postImage= findViewById(R.id.postCertificateImage);
-        progressBarImage=findViewById(R.id.progressBarImage);
+        //progressBarImage=findViewById(R.id.progressBarImage);
 
         postImage.setOnClickListener(new View.OnClickListener() {
             @Override

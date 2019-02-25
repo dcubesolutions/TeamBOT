@@ -8,6 +8,25 @@ public class User {
     private String id;
     private String imageUrl;
     private String status;
+    private String Degree;
+    private String ClininiNo;
+
+    public User() {
+    }
+
+    public User(String fName, String lName, String mid, String email, String id, String imageUrl, String status, String degree, String clininiNo) {
+        this.fName = fName;
+        this.lName = lName;
+        this.mid = mid;
+        this.email = email;
+        this.id = id;
+        this.imageUrl = imageUrl;
+        this.status = status;
+        this. Degree = degree;
+        this. ClininiNo = clininiNo;
+
+    }
+
     public String getfName() {
         return fName;
     }
@@ -64,18 +83,19 @@ public class User {
         this.status = status;
     }
 
-    public User(String fName, String lName, String mid, String email, String id, String imageUrl, String status) {
-        this.fName = fName;
-        this.lName = lName;
-        this.mid = mid;
-        this.email = email;
-        this.id = id;
-        this.imageUrl = imageUrl;
-        this.status = status;
+    public String getDegree() {
+        return Degree;
     }
 
-    public User() {
+    public void setDegree(String degree) {
+        Degree = degree;
     }
 
+    public String getClininiNo() {
+        return ClininiNo;
+    }
 
+    public void setClininiNo(String clininiNo) {
+        ClininiNo = clininiNo;
+    }
 }
