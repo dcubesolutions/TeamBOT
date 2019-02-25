@@ -54,7 +54,6 @@
                 android:hint="@string/first_name"
                 android:inputType="text"
                 android:paddingLeft="20dp"
-                android:text="@string/FName"
                 android:textColorHint="#9D90D0"
                 android:textSize="20dp" />
 
@@ -68,7 +67,6 @@
                 android:hint="@string/last_name"
                 android:inputType="text"
                 android:paddingLeft="20dp"
-                android:text="@string/LName"
                 android:textColorHint="#9D90D0"
                 android:textSize="20dp" />
 
@@ -82,7 +80,6 @@
                 android:hint="@string/mobileno"
                 android:inputType="numberDecimal|phone"
                 android:paddingLeft="20dp"
-                android:text="@string/ContactNo"
                 android:textColorHint="#9D90D0"
                 android:textSize="20dp" />
 
@@ -96,7 +93,6 @@
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:paddingLeft="20dp"
-                android:text="@string/Email"
                 android:textColorHint="#9D90D0"
                 android:textSize="20dp" />
 
@@ -110,7 +106,6 @@
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:paddingLeft="20dp"
-                android:text="@string/Password"
                 android:textColorHint="#9D90D0"
                 android:textSize="20dp" />
 
@@ -124,7 +119,6 @@
                 android:hint="@string/confirm_password"
                 android:inputType="textPassword"
                 android:paddingLeft="20dp"
-                android:text="@string/CPassword"
                 android:textColorHint="#9D90D0"
                 android:textSize="20dp" />
 
