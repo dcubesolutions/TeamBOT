@@ -1,5 +1,7 @@
 package com.example.medico;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -32,10 +34,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class SignUp extends AppCompatActivity {
     Button BtnSuSignUp;
     EditText FName, LName,ContactNo, Password, Email, CPassword;
-    TextView TvLogin;
+    TextView TvLogin, SignUp;
+    Spinner category,language;
     boolean twice;
     Spinner language,category;
     String spinnerValue;
@@ -48,9 +54,12 @@ public class SignUp extends AppCompatActivity {
     //private FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseUser;
     ProgressBar progressBar2;
+    ProgressDialog dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         BtnSuSignUp = (Button) findViewById(R.id.BtnSuSignUp);
@@ -61,21 +70,26 @@ public class SignUp extends AppCompatActivity {
         Password = (EditText) findViewById(R.id.Password);
         Email = (EditText) findViewById(R.id.Email);
         TvLogin= (TextView) findViewById(R.id.TvLogin);
+        mAuth = FirebaseAuth.getInstance();
         category=(Spinner)findViewById(R.id.category);
         language=(Spinner)findViewById(R.id.language);
-        progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
-        mAuth = FirebaseAuth.getInstance();
 
         ArrayAdapter<String> newadapter = new ArrayAdapter<String>(
-                SignUp.this, R.layout.spinner_layout_test, getResources().getStringArray(R.array.lang));
-        language.setAdapter(newadapter);
+                SignUp.this, R.layout.spinner_layout_test, getResources().getStringArray(R.array.names)
+        );
+        category.setAdapter(newadapter);
 
+        ArrayAdapter<String> newadapter2 = new ArrayAdapter<String>(
+                SignUp.this, R.layout.spinner_layout_test, getResources().getStringArray(R.array.lang)
+        );
+        language.setAdapter(newadapter2);
+        databaseUser = FirebaseDatabase.getInstance().getReference("user_data");
         ArrayAdapter<String> newadapter2 = new ArrayAdapter<String>(
                 SignUp.this, R.layout.spinner_layout_test, getResources().getStringArray(R.array.category));
         category.setAdapter(newadapter2);
 
        // databaseUser = FirebaseDatabase.getInstance().getReference("user_data");
-        progressBar2.setVisibility(View.INVISIBLE);
+
 
         category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -92,50 +106,64 @@ public class SignUp extends AppCompatActivity {
         BtnSuSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                    dialog=new ProgressDialog(SignUp.this);
+                    dialog.setMessage("Loading");
+                    dialog.show();
                 if (FName.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "FirstName Required..!!", Toast.LENGTH_SHORT).show();
                     FName.setError("FirstName Required");
+                    dialog.dismiss();
                     return;
                 } else if (LName.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "LastName Required..!!", Toast.LENGTH_SHORT).show();
                     LName.setError("LastName Required");
+                    dialog.dismiss();
                     return;
                 }
                 else if (ContactNo.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Contact Required..!!", Toast.LENGTH_SHORT).show();
                     ContactNo.setError("Contact Required");
+                    dialog.dismiss();
 
                     return;
                 } /*else if (!isContactNoValid(ContactNo.getText().toString().trim())) {
                     Toast.makeText(getApplicationContext(), "ContactNo invalid..!!", Toast.LENGTH_SHORT).show();
                     ContactNo.setError("Contact Invalid");
-                    return;*/
-
-                 else if (Email.getText().toString().isEmpty()) {
+                    dialog.dismiss();
+                    return;
+                } else if (Email.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Email Required..!!", Toast.LENGTH_SHORT).show();
+                    progressBar2.setVisibility(View.INVISIBLE);
                     Email.setError("Email Required");
+                    dialog.dismiss();
                     return;
                 } else if (!Patterns.EMAIL_ADDRESS.matcher(Email.getText().toString().trim()).matches()) {
                     Toast.makeText(getApplicationContext(), "Email Invaild..!!", Toast.LENGTH_SHORT).show();
+                    progressBar2.setVisibility(View.INVISIBLE);
                     Email.setError("Email Invalid");
+                    dialog.dismiss();
                     return;
                 } else if (Password.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Password Required..!!", Toast.LENGTH_SHORT).show();
                     Password.setError("Password Required");
+                    dialog.dismiss();
                     return;
                 }
                 else if (CPassword.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Password Required..!!", Toast.LENGTH_SHORT).show();
                     Password.setError("Password Required");
+                    dialog.dismiss();
                     return;
                 }
                 else if (!(Password.getText().toString()).equals(CPassword.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "Password not match", Toast.LENGTH_SHORT).show();
                     CPassword.setError("Password not match");
+                    dialog.dismiss();
                     return;
                 }
                 else{
-                    progressBar2.setVisibility(View.VISIBLE);
+
+//                    progressBar2.setVisibility(View.VISIBLE);
                    final String email=Email.getText().toString().trim();
                    final String password=Password.getText().toString().trim();
                    final String fName= FName.getText().toString().trim();
@@ -150,7 +178,8 @@ public class SignUp extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
+
+                                        //Sign in success, update UI with the signed-in user's information
                                         BtnSuSignUp.setEnabled(false);
                                         Log.d(String.valueOf(SignUp.this), "createUserWithEmail:success");
                                                 String id= mAuth.getCurrentUser().getUid();
@@ -201,7 +230,6 @@ public class SignUp extends AppCompatActivity {
                             });
 
                 }
-                progressBar2.setVisibility(View.INVISIBLE);
             }
         });
         TvLogin.setOnClickListener(new View.OnClickListener() {
@@ -210,12 +238,14 @@ public class SignUp extends AppCompatActivity {
                 startActivity(new Intent(SignUp.this,LogIn.class));
             }
         });
+
        /* BtnSuCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CleanEditText();
             }
         });*/
+    }
 
         language.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -312,6 +342,7 @@ public class SignUp extends AppCompatActivity {
             }
         });
     }*/
+
     @Override
     public void onBackPressed() {
         Log.d(TAG,"click");
