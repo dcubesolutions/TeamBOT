@@ -105,6 +105,11 @@ public class HomeActivity extends AppCompatActivity
             startActivity(new Intent(HomeActivity.this,LogIn.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             return true;
         }
+        else if (id == R.id.nav_hindi) {
+            startActivity(new Intent(HomeActivity.this,hindiposts.class));
+
+
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -10,6 +10,12 @@
             android:title="@string/home"
             />
         <item
+            android:id="@+id/nav_hindi"
+            android:icon="@drawable/home"
+            android:title="Hindi Posts"
+            />
+
+        <item
             android:id="@+id/nav_chat"
             android:icon="@drawable/chat"
             android:title="@string/chat" />

@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateVisible|adjustPan">
-        <activity android:name=".DiseasesActivity"></activity>
+        <activity android:name=".hindiposts"></activity>
+        <activity android:name=".DiseasesActivity" />
         <activity
             android:name=".newPost"
             android:configChanges="orientation|keyboardHidden"

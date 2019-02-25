@@ -58,6 +58,7 @@ public class homeFrag extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 BlogPost blogPost = dataSnapshot.getValue(BlogPost.class);
+
                 blog_list.add(blogPost);
                 blogRecyclerAdapter.notifyDataSetChanged();
             }
