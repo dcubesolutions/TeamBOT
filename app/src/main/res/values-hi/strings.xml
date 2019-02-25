@@ -45,6 +45,19 @@
     <string name="home">होम</string>
     <string name="log_out">लोग आउट</string>
     <string name="chat">बातचीत</string>
-    <string name="settings">सेटिंग्स</string>
+    <string name="setting">सेटिंग्स</string>
     <string name="about">विषय</string>
+
+    <string name="verify">सत्यापन</string>
+    <string name="enter_otp">OTP दर्ज करें</string>
+    <string name="confrim">पुष्टि करें</string>
+
+    <string name="postTitle">शीर्षक....</string>
+    <string name="postSubject">विषय....</string>
+    <string name="createnewpost">नई पोस्ट बनाएँ</string>
+
+    <string name="degree">डिग्री दर्ज करें</string>
+    <string name="Doctor_details">डॉक्टर का विवरण दर्ज करें</string>
+    <string name="clinicmobileno">क्लिनिक संपर्क नंबर</string>
+
 </resources>

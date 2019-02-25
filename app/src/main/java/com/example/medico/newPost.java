@@ -14,6 +14,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.example.medico.Model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,6 +26,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -30,6 +42,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.Random;
+import java.util.UUID;
 
 public class newPost extends AppCompatActivity {
 
@@ -48,10 +65,11 @@ public class newPost extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_post);
-        newPostToolbar = findViewById(R.id.newPostToolbar);
-        /*//setSupportActionBar(newPostToolbar);
+        newPostToolbar=findViewById(R.id.newPostToolbar);
+        setSupportActionBar(newPostToolbar);
        setSupportActionBar(newPostToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
+        getSupportActionBar().setTitle(R.string.createnewpost);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         storageReference = FirebaseStorage.getInstance().getReference().child("postImages");
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -62,6 +80,9 @@ public class newPost extends AppCompatActivity {
         postTitle = findViewById(R.id.postTitle);
         postSubject = findViewById(R.id.postSubject);
         floatingPost = findViewById(R.id.floatingPost);
+        postImage= findViewById(R.id.postCertificateImage);
+        progressBarImage=findViewById(R.id.progressBarImage);
+
         postImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

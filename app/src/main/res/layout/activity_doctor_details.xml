@@ -1,0 +1,107 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/curvedbgfull"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+    <ImageView
+        android:layout_width="235dp"
+        android:layout_height="85dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/medicologo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="120dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/Doctor_details"
+            android:textColor="#FFFFFF"
+            android:textSize="50dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="50dp">
+
+            <EditText
+                android:id="@+id/Degree"
+                android:layout_width="275dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:background="@drawable/roundcorner"
+                android:hint="@string/degree"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:textColorHint="#9D90D0"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/ClinicContactNo"
+                android:layout_width="275dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:background="@drawable/roundcorner"
+                android:hint="@string/clinicmobileno"
+                android:inputType="numberDecimal|phone"
+                android:paddingLeft="20dp"
+                android:textColorHint="#9D90D0"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:id="@+id/postCertificateImage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/addbutton"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <ProgressBar
+                    android:id="@+id/progressBar2"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminateDrawable="@drawable/progress" />
+
+                <Button
+                    android:id="@+id/BtnSuSignUp"
+                    android:layout_width="134dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/registerbtn1"
+                    android:text="@string/confrim"
+                    android:textColor="#FFF"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

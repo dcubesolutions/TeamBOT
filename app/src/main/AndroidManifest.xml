@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application xmlns:tools="http://schemas.android.com/tools"
+        android:name=".Helper.MainApplication"
         android:allowBackup="true"
         android:icon="@drawable/medicoicon"
         android:label="@string/app_name"
@@ -15,6 +16,9 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateVisible|adjustPan">
         <activity android:name=".CommentActivity"></activity>
+        <activity android:name=".doctorDetails"></activity>
+        <activity android:name=".verifyotp" />
+        <activity android:name=".settings" />
         <activity
             android:name=".newPost"
             android:configChanges="orientation|keyboardHidden"
@@ -69,4 +73,20 @@
             android:theme="@style/Base.Theme.AppCompat" />
     </application>
 
+        <service
+            android:name=".Notifications.MyFirebaseIdService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTACE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".Notifications.MyFirebaseMessaging"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 </manifest>
