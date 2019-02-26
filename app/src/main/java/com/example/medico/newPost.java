@@ -117,62 +117,62 @@ public class newPost extends AppCompatActivity {
 
         });
         floatingPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String title = postTitle.getText().toString();
-                String subject = postSubject.getText().toString();
-                if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(title) && postImageUri != null) {
-                    // String randomName =
+        @Override
+        public void onClick(View view) {
+            String title = postTitle.getText().toString();
+            String subject = postSubject.getText().toString();
+            if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(title) && postImageUri != null) {
+                // String randomName =
 
-                    final StorageReference filePath = storageReference.child(postImageUri.getLastPathSegment());
-                    filePath.putFile(postImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                final StorageReference filePath = storageReference.child(postImageUri.getLastPathSegment());
+                filePath.putFile(postImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                            filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    String imageDownloadLink = uri.toString();
-                                    UploadPosts uploadPosts = new UploadPosts(imageDownloadLink, postTitle.getText().toString(), postSubject.getText().toString(), userId);
-                                    addPost(uploadPosts);
-                                }
-                            });
-                        }
-                        private void addPost(UploadPosts uploadPosts) {
+                        filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                String imageDownloadLink = uri.toString();
+                                UploadPosts uploadPosts = new UploadPosts(imageDownloadLink, postTitle.getText().toString(), postSubject.getText().toString(), userId);
+                                addPost(uploadPosts);
+                            }
+                        });
+                    }
+                    private void addPost(UploadPosts uploadPosts) {
 
-                            FirebaseDatabase database = FirebaseDatabase.getInstance();
-                            DatabaseReference myRef = database.getReference("Posts").push();
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference myRef = database.getReference("Posts").push();
 
-                            // get post unique ID and upadte post key
-                            String key = myRef.getKey();
-                            uploadPosts.setPostKey(key);
-                            uploadPosts.getTimeStamp().toString();
+                        // get post unique ID and upadte post key
+                        String key = myRef.getKey();
+                        uploadPosts.setPostKey(key);
+                        uploadPosts.getTimeStamp().toString();
 
-                            // add post data to firebase database
+                        // add post data to firebase database
 
-                            myRef.setValue(uploadPosts).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(newPost.this,"Post Added Succesfully",Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(newPost.this,HomeActivity.class));
-                                    //popupClickProgress.setVisibility(View.INVISIBLE);
-                                    // floatingPostBtn.set(View.VISIBLE);
-                                }
-                            });
-
-
+                        myRef.setValue(uploadPosts).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(newPost.this,"Post Added Succesfully",Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(newPost.this,HomeActivity.class));
+                                //popupClickProgress.setVisibility(View.INVISIBLE);
+                                // floatingPostBtn.set(View.VISIBLE);
+                            }
+                        });
 
 
 
-                        }
 
-                    });
 
-                }
+                    }
+
+                });
 
             }
-        });
-    }
+
+        }
+    });
+}
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

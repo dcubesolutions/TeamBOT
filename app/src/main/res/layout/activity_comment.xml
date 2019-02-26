@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/main_blog_post"
@@ -56,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/main_blog_post">
 
         <TextView
-            android:id="@+id/blogTitle"
+            android:id="@+id/commentTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -89,30 +89,96 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="289dp"
             android:layout_marginBottom="8dp"
             android:text="0 Likes"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/blogLikeBtn"
             app:layout_constraintTop_toBottomOf="@+id/blogTitle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/commentRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/commentSubject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+                app:layout_constraintVertical_bias="0.086" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/commentRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="#FFF"
-        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/commentText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/blogRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </FrameLayout>
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <EditText
+        android:id="@+id/commentText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1"
+        android:hint="Type comment..."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/commentSendBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blogRecyclerView" />
+
+    <Button
+        android:id="@+id/commentSendBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="53dp"
+        android:layout_marginEnd="8dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/commentText"
+        app:layout_constraintTop_toBottomOf="@+id/blogRecyclerView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

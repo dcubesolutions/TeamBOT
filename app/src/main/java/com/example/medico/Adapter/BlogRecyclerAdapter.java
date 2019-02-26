@@ -34,8 +34,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapter.MyViewHolder> {
 
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+        FirebaseDatabase firebaseDatabase;
+        DatabaseReference databaseReference;
     //FirebaseDatabase firebaseLike;
     FirebaseAuth mAuth;
     private Context mContext;
@@ -76,6 +76,8 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, CommentActivity.class);
                 intent.putExtra("image_url",blogList.get(position).getUploadImageUrl());
+                intent.putExtra("title",blogList.get(position).getUploadTitle());
+                intent.putExtra("desc",blogList.get(position).getUploadSubject());
                 mContext.startActivity(intent);
             }
         });

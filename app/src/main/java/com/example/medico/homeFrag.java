@@ -53,7 +53,6 @@ public class homeFrag extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
         ((HomeActivity) getActivity()).setActionBarTitle("Post");
         mAuth=FirebaseAuth.getInstance();
         blogRecyclerView = view.findViewById(R.id.blogRecyclerView);
