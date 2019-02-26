@@ -25,6 +25,7 @@
     </string-array>
 
     <string name="post_title">पोस्ट</string>
+    <string name="SignUp">साइन अप</string>
 
     <string name="confirm_password">पासवर्ड की पुष्टि कीजिये</string>
     <string name="password">पासवर्ड</string>
@@ -49,8 +50,9 @@
     <string name="about">विषय</string>
 
     <string name="verify">सत्यापन</string>
+    <string name="sendotp">OTP भेजें</string>
+    <string name="confirm">पुष्टि करें</string>
     <string name="enter_otp">OTP दर्ज करें</string>
-    <string name="confrim">पुष्टि करें</string>
 
     <string name="postTitle">शीर्षक....</string>
     <string name="postSubject">विषय....</string>
@@ -59,5 +61,12 @@
     <string name="degree">डिग्री दर्ज करें</string>
     <string name="Doctor_details">डॉक्टर का विवरण दर्ज करें</string>
     <string name="clinicmobileno">क्लिनिक संपर्क नंबर</string>
+    <string name="upload_docs">दस्तावेज़ अपलोड करें</string>
+
+    <string name="type_message">एक संदेश लिखें...</string>
+
+    <string name="search">खोज</string>
+
+    <string name="profile">प्रोफाइल</string>
 
 </resources>

@@ -71,7 +71,6 @@ public class homeFrag extends Fragment {
 
                     bloglist = new ArrayList<>();
                     for (DataSnapshot postsnap : dataSnapshot.getChildren()) {
-
                         String blogPostId = postsnap.getKey();
                         UploadPosts blogPost = postsnap.getValue(UploadPosts.class).withId(blogPostId);
                         bloglist.add(blogPost);

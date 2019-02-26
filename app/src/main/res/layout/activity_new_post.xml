@@ -9,7 +9,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/newPostToolbar"
         android:layout_width="0dp"
-        app:title="Create New Post"
+        app:title="@string/createnewpost"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"

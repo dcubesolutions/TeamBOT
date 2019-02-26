@@ -166,7 +166,7 @@
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:layout_marginTop="25dp"
                     android:background="@drawable/registerbtn1"
-                    android:text="@string/Register"
+                    android:text="@string/register"
                     android:textColor="#FFF"
                     android:textStyle="bold" />
 

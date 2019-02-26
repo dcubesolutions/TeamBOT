@@ -49,8 +49,9 @@
     <string name="about">About</string>
 
     <string name="verify">Verification</string>
+    <string name="sendotp">Send OTP</string>
+    <string name="confirm">Confirm</string>
     <string name="enter_otp">Enter OTP</string>
-    <string name="confrim">Confirm</string>
 
     <string name="postTitle">Title....</string>
     <string name="postSubject">Subject....</string>
@@ -59,4 +60,11 @@
     <string name="degree">Enter Degree</string>
     <string name="Doctor_details">Enter Doctor Details</string>
     <string name="clinicmobileno">Clinic Contact No.</string>
+    <string name="upload_docs">Upload Documents</string>
+
+    <string name="type_message">Type a message...</string>
+
+    <string name="search">Search</string>
+
+    <string name="profile">Profile</string>
 </resources>

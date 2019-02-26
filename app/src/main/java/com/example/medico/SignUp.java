@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.DisplayMetrics;
@@ -21,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ProgressBar;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 
@@ -29,23 +32,26 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SignUp extends AppCompatActivity {
     Button BtnSuSignUp;
     EditText FName, LName,ContactNo, Password, Email, CPassword;
     TextView TvLogin;
     boolean twice;
+    boolean verified = false;
     Spinner language,category;
-    String spinnerValue;
-    int cat = 0;
+    String spinnerValue,cat;
     Locale myLocale;
     String currentLanguage, currentLang;
     final String TAG=getClass().getName();
     private FirebaseAuth mAuth;
     private String Degree, ClinicNo;
-    //private FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseUser;
     ProgressBar progressBar2;
 
@@ -82,6 +88,16 @@ public class SignUp extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
                 spinnerValue = adapterView.getItemAtPosition(position).toString();
+                if(position == 1)
+                {
+                    cat = "Patient";
+                    verified = false;
+                }
+                else if(position == 2)
+                {
+                    cat = "Doctor";
+                    verified = true;
+                }
             }
 
             @Override
@@ -143,7 +159,8 @@ public class SignUp extends AppCompatActivity {
                     final String mid = ContactNo.getText().toString();
                     final String status="offline";
                     final String imageURL="default";
-                    mAuth = FirebaseAuth.getInstance();
+
+
 
                     mAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -154,11 +171,14 @@ public class SignUp extends AppCompatActivity {
                                         BtnSuSignUp.setEnabled(false);
                                         Log.d(String.valueOf(SignUp.this), "createUserWithEmail:success");
                                         String id= mAuth.getCurrentUser().getUid();
-                                        databaseUser = FirebaseDatabase.getInstance().getReference("user_data");
-                                        if(spinnerValue.equals("Patient")){
+                                        mAuth = FirebaseAuth.getInstance();
 
+                                        databaseUser = FirebaseDatabase.getInstance().getReference("user_data");
+
+                                        if(spinnerValue.equals("Patient") || spinnerValue.equals("मरीज")){
+                                            databaseUser = FirebaseDatabase.getInstance().getReference("user_data");
                                             DatabaseReference mRef= databaseUser.child(id);
-                                            User user_db = new User(fName,lName,mid,email,id,"default","offline",Degree, ClinicNo);
+                                            User user_db = new User(fName,lName,mid,email,id,"default","offline",Degree, ClinicNo, cat, verified);
                                             mRef.setValue(user_db);
                                             Toast.makeText(SignUp.this, "Patient Successfully Registered", Toast.LENGTH_SHORT).show();
                                             Intent intent;
@@ -166,7 +186,7 @@ public class SignUp extends AppCompatActivity {
                                             intent.putExtra("phoneNumber",mid);
                                             startActivity(intent);
                                         }
-                                        else if(spinnerValue.equals("Doctor")){
+                                        else if(spinnerValue.equals("Doctor") || spinnerValue.equals("चिकित्सक")){
                                             Toast.makeText(SignUp.this, "Doctor Successfully Registered", Toast.LENGTH_SHORT).show();
                                             Intent intent;
                                             intent = new Intent(SignUp.this,doctorDetails.class);
@@ -177,6 +197,8 @@ public class SignUp extends AppCompatActivity {
                                             intent.putExtra("id",id);
                                             intent.putExtra("imageURL",imageURL);
                                             intent.putExtra("status",status);
+                                            intent.putExtra("isverified",verified);
+                                            intent.putExtra("category",cat);
                                             startActivity(intent);
                                         }
                                         else if(spinnerValue.equals("Select Category")){
