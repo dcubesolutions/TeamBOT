@@ -61,7 +61,7 @@ public class settings extends AppCompatActivity{
         settingToolbar=findViewById(R.id.settingToolbar);
         setSupportActionBar(settingToolbar);
         getSupportActionBar().setTitle(R.string.setting);
-        /*getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         language=(Spinner)findViewById(R.id.language);
 

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AwarenessActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/heading1"
+        android:text="Awareness:-"
+        android:textColor="#000"
+        android:textSize="25dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/heading1"
+        android:textSize="20dp"
+        android:id="@+id/text"
+        android:text="       According to the survey of data, it has been concluded that among 100% pregnant women, 70% of them are unaware about premature births and do not take care about their health; resulting into illness in both babies and mothers.
+ Following points should be take care while in pregnancy to be aware about premature birth.\n
+1)Due to ignorance about pain\n
+2)Due to avoiding medicines at proper time\n
+3)Due to unhealthy diet\n
+4)Due to excessive usage of cosmetics\n
+"
+        android:textColor="#000"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/heading2"
+        android:layout_below="@+id/text"
+        android:text="CARING OF PREMATURE BABIES.:-"
+        android:textColor="#000"
+        android:textSize="25dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/heading3"
+        android:layout_below="@+id/text"
+        android:text="The correct temperature:-"
+        android:textColor="#000"
+        android:textSize="25dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/heading3"
+        android:textSize="20dp"
+        android:id="@+id/text2"
+        android:text="You need to make sure that you keep your baby at a temperature that is comfortable and safe. The best way to do this is usually with layers - for example, a vest, a sleepsuit and blankets or a zip-up sleeping bag as necessary. You can easily add or remove an item depending on how warm or chilly the surroundings are.
+"
+        android:textColor="#000"/>
+
+
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/heading4"
+    android:layout_below="@+id/text2"
+    android:text=" Following Regular Time Table:-"
+    android:textColor="#000"
+    android:textSize="25dp"
+    android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/heading4"
+        android:textSize="20dp"
+        android:id="@+id/text3"
+        android:text=" Do check up regularly\n
+Concern pediatrician for even small troubles\n
+Keep up to date with vaccines\n
+Follow directions about feeding\n
+
+"
+        android:textColor="#000"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/heading5"
+        android:layout_below="@+id/text3"
+        android:text="Follow (Frequent) Feeding Cues:-"
+        android:textColor="#000"
+        android:textSize="25dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/heading5"
+        android:textSize="20dp"
+        android:id="@+id/text4"
+        android:text="In the hospital, premature babies, depending on their level of prematurity, learn to coordinate sucking, swallowing and breathing to eat safely. In those early days, tiny feedings of five milliliters — about the equivalent of a single teaspoon — every three hours around the clock are typical.
+"
+        android:textColor="#000"/>
+    </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+
+</RelativeLayout>

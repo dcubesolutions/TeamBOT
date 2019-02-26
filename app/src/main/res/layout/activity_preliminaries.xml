@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/heading1"
+        android:text="What does prematurity among child means?"
+        android:textColor="#000"
+        android:textSize="25dp"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/preliminaries"
+        android:id="@+id/image_preliminaries"
+        android:layout_below="@+id/heading1"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_preliminaries"
+        android:textSize="20dp"
+        android:id="@+id/text"
+        android:text=" A premature birth is a birth that takes place more than three weeks before the baby's estimated due date. In other words, a premature birth is one that occurs before the start of the 37th week of pregnancy.
+Premature babies, especially those born very early, often have complicated medical problems. Typically, complications of prematurity vary. But the earlier your baby is born, the higher the risk of complications.
+Depending on how early a baby is born, he or she may be:\n
+\u2022	Late preterm, born between 34 and 36 completed weeks of pregnancy\n
+•	Moderately preterm, born between 32 and 34 weeks of pregnancy\n
+•	Very preterm, born at less than 32 weeks of pregnancy\n
+•	Extremely preterm, born at or before 25 weeks of pregnancy\n
+"
+        android:textColor="#000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Symptoms"
+            android:textColor="#000"
+            android:layout_below="@+id/text"
+            android:id="@+id/heading2"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:layout_below="@+id/heading2"
+            android:text="•	Small size, with a disproportionately large head\n
+•	Sharper looking, less rounded features than a full-term baby's features, due to a lack of fat stores\n
+•	Fine hair (lanugo) covering much of the body\n
+•	Low body temperature, especially immediately after birth in the delivery room, due to a lack of stored body fat\n
+•	Labored breathing or respiratory distress\n
+•	Lack of reflexes for sucking and swallowing, leading to feeding difficulties
+"
+
+            android:textSize="20dp"
+            />
+    </LinearLayout>
+</ScrollView>
+
+</RelativeLayout>

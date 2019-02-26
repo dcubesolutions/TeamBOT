@@ -6,6 +6,8 @@ import androidx.annotation.Nullable;
 import com.example.medico.Fragments.ProfileFragment;
 import com.example.medico.Model.Chat;
 import com.google.android.material.tabs.TabLayout;
+
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -41,6 +43,11 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        Toolbar toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Chat");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final TabLayout tablayout=findViewById(R.id.tab_layout);
         final ViewPager viewpager=findViewById(R.id.view_pager);

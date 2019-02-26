@@ -15,10 +15,18 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateVisible|adjustPan">
         <activity android:name=".CommentActivity"></activity>
-        <activity android:name=".doctorDetails"
+        <activity android:name=".AwarenessActivity"></activity>
+		<activity android:name=".doctorDetails"
             android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".PreliminariesActivity" />
+        <activity android:name=".CommentActivity" />
+        <activity android:name=".DiseasesActivity" />
+        <activity android:name=".doctorDetails" />
+        <activity android:name=".DiseaseDescriptionActivity" />
         <activity android:name=".verifyotp" />
-        <activity android:name=".settings" />
+        <activity
+            android:name=".settings"
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".newPost"
             android:configChanges="orientation|keyboardHidden"
@@ -27,6 +35,7 @@
         <activity
             android:name=".ChatActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".HomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Posts"
@@ -71,6 +80,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@style/Base.Theme.AppCompat" />
+
         <service
             android:name=".Notifications.MyFirebaseIdService"
             android:enabled="true"
@@ -88,4 +98,5 @@
             </intent-filter>
         </service>
     </application>
+
 </manifest>

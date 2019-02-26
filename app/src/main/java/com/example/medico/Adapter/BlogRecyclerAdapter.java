@@ -34,8 +34,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapter.MyViewHolder> {
 
-        FirebaseDatabase firebaseDatabase;
-        DatabaseReference databaseReference;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
     //FirebaseDatabase firebaseLike;
     FirebaseAuth mAuth;
     private Context mContext;
