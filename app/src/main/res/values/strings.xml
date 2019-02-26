@@ -9,15 +9,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_sign_up">SignUp</string>
 
-    <string name="FName">First Name</string>
-    <string name="SignUp">SignUP</string>
-    <string name="LName">Last Name</string>
-    <string name="Register">Register</string>
-    <string name="CPassword">Confirm Password</string>
-    <string name="Password">Password</string>
-    <string name="Email">Email</string>
-    <string name="ContactNo">Contact No.</string>
-
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -35,7 +26,7 @@
     </string-array>
 
     <string name="post_title">Posts</string>
-
+    <string name="SignUp">SignUP</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
@@ -59,8 +50,10 @@
     <string name="about">About</string>
 
     <string name="verify">Verification</string>
+    <string name="sendotp">Send OTP</string>
+    <string name="confirm">Confirm</string>
     <string name="enter_otp">Enter OTP</string>
-    <string name="confrim">Confirm</string>
+
 
     <string name="postTitle">Title....</string>
     <string name="postSubject">Subject....</string>
@@ -69,4 +62,11 @@
     <string name="degree">Enter Degree</string>
     <string name="Doctor_details">Enter Doctor Details</string>
     <string name="clinicmobileno">Clinic Contact No.</string>
+    <string name="upload_docs">Upload Documents</string>
+
+
+    <string name="type_message">Type a message...</string>
+
+    <string name="search">Search</string>
+    <string name="profile">Profile</string>
 </resources>

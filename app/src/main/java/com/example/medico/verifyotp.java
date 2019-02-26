@@ -45,7 +45,7 @@ public class verifyotp extends AppCompatActivity {
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendBtn.setEnabled(false);
+
                 if (btnType == 0) {
                     String phoneText=intent.getStringExtra("phoneNumber");
                     PhoneAuthProvider.getInstance().verifyPhoneNumber(
@@ -83,11 +83,12 @@ public class verifyotp extends AppCompatActivity {
                 // now need to ask the user to enter the code and then construct a credential
                 // by combining the code with a verification ID.
                 // Save verification ID and resending token so we can use them later
+                btnType=1;
                 mVerificationId = verificationId;
                 mResendToken = token;
 
-                sendBtn.setText("verify code");
-                btnType=1;
+                sendBtn.setText(R.string.confirm);
+
                 sendBtn.setEnabled(true);
 
                 // ...
