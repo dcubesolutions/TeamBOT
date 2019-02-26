@@ -19,9 +19,7 @@
 		<activity android:name=".doctorDetails"
             android:configChanges="orientation|keyboardHidden"/>
         <activity android:name=".PreliminariesActivity" />
-        <activity android:name=".CommentActivity" />
         <activity android:name=".DiseasesActivity" />
-        <activity android:name=".doctorDetails" />
         <activity android:name=".DiseaseDescriptionActivity" />
         <activity android:name=".verifyotp" />
         <activity

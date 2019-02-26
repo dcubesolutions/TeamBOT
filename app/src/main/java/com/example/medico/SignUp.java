@@ -71,7 +71,6 @@ public class SignUp extends AppCompatActivity {
         TvLogin= (TextView) findViewById(R.id.TvLogin);
         category=(Spinner)findViewById(R.id.category);
         language=(Spinner)findViewById(R.id.language);
-        progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
         mAuth = FirebaseAuth.getInstance();
 
         ArrayAdapter<String> newadapter = new ArrayAdapter<String>(
@@ -110,7 +109,7 @@ public class SignUp extends AppCompatActivity {
         BtnSuSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog=new ProgressDialog(SignUp.this);
+                dialog = new ProgressDialog(SignUp.this);
                 dialog.setMessage("Loading");
                 dialog.show();
                 if (FName.getText().toString().isEmpty()) {
@@ -123,8 +122,7 @@ public class SignUp extends AppCompatActivity {
                     LName.setError("LastName Required");
                     dialog.dismiss();
                     return;
-                }
-                else if (ContactNo.getText().toString().isEmpty()) {
+                } else if (ContactNo.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Contact Required..!!", Toast.LENGTH_SHORT).show();
                     ContactNo.setError("Contact Required");
                     dialog.dismiss();
@@ -132,9 +130,7 @@ public class SignUp extends AppCompatActivity {
                 } /*else if (!isContactNoValid(ContactNo.getText().toString().trim())) {
                     Toast.makeText(getApplicationContext(), "ContactNo invalid..!!", Toast.LENGTH_SHORT).show();
                     ContactNo.setError("Contact Invalid");
-                    return;*/
-
-                else if (Email.getText().toString().isEmpty()) {
+                    return;*/ else if (Email.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Email Required..!!", Toast.LENGTH_SHORT).show();
                     Email.setError("Email Required");
                     dialog.dismiss();
@@ -149,28 +145,25 @@ public class SignUp extends AppCompatActivity {
                     Password.setError("Password Required");
                     dialog.dismiss();
                     return;
-                }
-                else if (CPassword.getText().toString().isEmpty()) {
+                } else if (CPassword.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Password Required..!!", Toast.LENGTH_SHORT).show();
                     Password.setError("Password Required");
                     dialog.dismiss();
                     return;
-                }
-                else if (!(Password.getText().toString()).equals(CPassword.getText().toString())) {
+                } else if (!(Password.getText().toString()).equals(CPassword.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "Password not match", Toast.LENGTH_SHORT).show();
                     CPassword.setError("Password not match");
                     dialog.dismiss();
                     return;
-                }
-                else{
-                   // progressBar2.setVisibility(View.VISIBLE);
-                    final String email=Email.getText().toString().trim();
-                    final String password=Password.getText().toString().trim();
-                    final String fName= FName.getText().toString().trim();
+                } else {
+                    // progressBar2.setVisibility(View.VISIBLE);
+                    final String email = Email.getText().toString().trim();
+                    final String password = Password.getText().toString().trim();
+                    final String fName = FName.getText().toString().trim();
                     final String lName = LName.getText().toString().trim();
                     final String mid = ContactNo.getText().toString();
-                    final String status="offline";
-                    final String imageURL="default";
+                    final String status = "offline";
+                    final String imageURL = "default";
 
                     mAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -180,39 +173,35 @@ public class SignUp extends AppCompatActivity {
                                         // Sign in success, update UI with the signed-in user's information
                                         BtnSuSignUp.setEnabled(false);
                                         Log.d(String.valueOf(SignUp.this), "createUserWithEmail:success");
-                                        String id= mAuth.getCurrentUser().getUid();
+                                        String id = mAuth.getCurrentUser().getUid();
                                         mAuth = FirebaseAuth.getInstance();
 
                                         databaseUser = FirebaseDatabase.getInstance().getReference("user_data");
-                                        if(spinnerValue.equals("Patient")){
-
-                                        if(spinnerValue.equals("Patient") || spinnerValue.equals("मरीज")){
+                                        if (spinnerValue.equals("Patient") || spinnerValue.equals("मरीज")) {
                                             databaseUser = FirebaseDatabase.getInstance().getReference("user_data");
-                                            DatabaseReference mRef= databaseUser.child(id);
-                                            User user_db = new User(fName,lName,mid,email,id,"default","offline",Degree, ClinicNo);
+                                            DatabaseReference mRef = databaseUser.child(id);
+                                            User user_db = new User(fName, lName, mid, email, id, "default", "offline", Degree, ClinicNo, cat, verified);
                                             mRef.setValue(user_db);
                                             Toast.makeText(SignUp.this, "Patient Successfully Registered", Toast.LENGTH_SHORT).show();
                                             Intent intent;
-                                            intent = new Intent(SignUp.this,verifyotp.class);
-                                            intent.putExtra("phoneNumber",mid);
+                                            intent = new Intent(SignUp.this, verifyotp.class);
+                                            intent.putExtra("phoneNumber", mid);
                                             startActivity(intent);
-                                        }
-                                        else if(spinnerValue.equals("Doctor") || spinnerValue.equals("चिकित्सक")){
+                                        } else if (spinnerValue.equals("Doctor") || spinnerValue.equals("चिकित्सक")) {
                                             Toast.makeText(SignUp.this, "Doctor Successfully Registered", Toast.LENGTH_SHORT).show();
                                             Intent intent;
-                                            intent = new Intent(SignUp.this,doctorDetails.class);
-                                            intent.putExtra("phoneNumber",mid);
-                                            intent.putExtra("fName",fName);
-                                            intent.putExtra("lname",lName);
-                                            intent.putExtra("email",email);
-                                            intent.putExtra("id",id);
-                                            intent.putExtra("imageURL",imageURL);
-                                            intent.putExtra("status",status);
-                                            intent.putExtra("isverified",verified);
-                                            intent.putExtra("category",cat);
+                                            intent = new Intent(SignUp.this, doctorDetails.class);
+                                            intent.putExtra("phoneNumber", mid);
+                                            intent.putExtra("fName", fName);
+                                            intent.putExtra("lname", lName);
+                                            intent.putExtra("email", email);
+                                            intent.putExtra("id", id);
+                                            intent.putExtra("imageURL", imageURL);
+                                            intent.putExtra("status", status);
+                                            intent.putExtra("isverified", verified);
+                                            intent.putExtra("category", cat);
                                             startActivity(intent);
-                                        }
-                                        else if(spinnerValue.equals("Select Category")){
+                                        } else if (spinnerValue.equals("Select Category")) {
                                             Toast.makeText(SignUp.this, "Please Select a Category!", Toast.LENGTH_SHORT).show();
                                         }
                                     } else {
@@ -223,14 +212,11 @@ public class SignUp extends AppCompatActivity {
                                         //updateUI(null);
                                     }
 
-                                    // ...
                                 }
-
 
                             });
 
                 }
-                //progressBar2.setVisibility(View.INVISIBLE);
             }
         });
         TvLogin.setOnClickListener(new View.OnClickListener() {
